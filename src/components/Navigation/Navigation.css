@@ -1,0 +1,137 @@
+.navigation {
+  width: 100%;
+  padding-left: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation__link {
+  margin: 0;
+  line-height: 1;
+  color: #FFF;
+  font-size: 13px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.navigation__link_active {
+  font-weight: 500;
+}
+
+.navigation__signup {
+  margin: 0;
+  color: #FFF;
+  text-align: right;
+  font-size: 12px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+.navigation__signin-button {
+  margin: 0;
+  color: #000;
+  font-size: 12px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  border: none;
+  width: 76px;
+  height: 32px;
+  border-radius: 3px;
+  background: #3DDC84;
+}
+
+.navigation__account-button {
+  margin: 0;
+  color: #FFF;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  position: relative;
+}
+
+.navigation__account-button::before {
+  content:"";
+  margin: 0;
+  line-height: 1;
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  margin: 0;
+  width: 100px;
+  height: 32px;
+  border-radius: 50px;
+  border: 2px solid rgba(170, 170, 170, 0.2);
+  background-image: url(../../images/icon__COLOR_icon-main.svg);
+  background-position: 12px 8px;
+  background-repeat: no-repeat;
+  background-size: 12px 14px;
+  background-color: transparent;
+}
+
+.navigation__burger-button {
+  display: none;
+  margin: 0;
+  width: 44px;
+  height: 44px;
+  background-image: url(../../images/menu-icon__COLOR_icon-color.svg);
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.navigation__films-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.navigation__account-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+@media (max-width: 1000px) {
+  .navigation {
+    justify-content: right;
+  }
+
+  .navigation__link, .navigation__account-button {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .navigation__account-block {
+    gap: 14px;
+  }
+
+  .navigation__signup {
+    font-size: 10px;
+  }
+
+  .navigation__signin-button {
+    font-size: 10px;
+    width: 54px;
+    height: 26px;
+  }
+}

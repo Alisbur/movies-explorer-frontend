@@ -1,0 +1,23 @@
+.account-button {
+  margin: 0;
+  width: 100px;
+  height: 32px;
+  position: relative;
+  border-radius: 50px;
+  border: 2px solid #AAA;
+  opacity: 0.2;
+  background-image: url(../../images/icon__COLOR_icon-main.svg);
+  background-position: 12px center;
+  background-repeat: no-repeat;
+  background-size: 12px 14px;
+  background-color: transparent;
+}
+
+.account-button__caption {
+  color: #FFF;
+  font-size: 14px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}

@@ -1,0 +1,29 @@
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts/fonts.css);
+
+.body-style {
+  margin: 0 auto;
+  line-height: 1;
+  background-color: #202020;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.link-transparency {
+  opacity: 1;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.link-transparency:hover {
+  opacity: 0.6;
+}
+
+.button-transparency {
+  opacity: 1;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.button-transparency:hover {
+  opacity: 0.8;
+}
