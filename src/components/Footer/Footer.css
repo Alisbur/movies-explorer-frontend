@@ -11,7 +11,7 @@
   align-content: center;
   line-height: 1;
   box-sizing: border-box;
-  padding: 79px 70px 20px 70px;
+  padding: 56px 70px 20px 70px;
 }
 
 .footer__title {
@@ -79,8 +79,7 @@
 
 @media (max-width: 600px) {
   .footer__content {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 62px 10px 20px 10px;
   }
 
   .footer__title {

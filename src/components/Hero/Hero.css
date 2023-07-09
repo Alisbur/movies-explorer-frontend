@@ -31,7 +31,7 @@
 }
 
 .hero__pic {
-  max-width: 722px;
+  min-width: 722px;
   max-height: 244px;
   align-self: self-end;
 }
@@ -39,6 +39,7 @@
 @media (max-width: 1000px) {
   .hero__content {
     padding: 300px 44px 70px 44px;
+    gap: 140px;
   }
 
   .hero__title {
@@ -57,7 +58,9 @@
 @media (max-width: 600px) {
   .hero__content {
     padding: 183px 10px 40px 10px;
+    gap: 60px;
   }
+
   .hero__title {
     min-width: 300px;
     font-size: 31px;

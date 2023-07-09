@@ -177,6 +177,11 @@
     padding: 90px 50px;
   }
 
+  .about__desc-grid {
+    row-gap: 22px;
+    column-gap: 30px;
+  }
+
   .about__schedule-grid {
     margin-top: 23px;
   }
@@ -192,11 +197,15 @@
     font-weight: 400;
     line-height: 17px;
   }
+
+  .about__back-time {
+    min-width: 142px;
+  }
 }
 
 @media (max-width: 600px) {
   .about__content {
-    padding: 60px 18px 70px 18px;
+    padding: 70px 18px 70px 18px;
     gap: 60px;
   }
 
@@ -209,7 +218,7 @@
   }
 
   .about__desc-grid {
-    row-gap: 16px;
+    row-gap: 18px;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     grid-template-areas:
@@ -225,7 +234,7 @@
   }
   
   .about__time-title {
-    padding-top: 40px;
+    padding-top: 37px;
   }
 
   .about__parts-text, .about__time-text {
@@ -238,8 +247,12 @@
     line-height: normal;
   } 
 
+  .about__back-time {
+    min-width: 100px;
+  }
+
   .about__schedule-grid {
-    row-gap: 10px;
+    row-gap: 8px;
     margin: 0;
   }
 }

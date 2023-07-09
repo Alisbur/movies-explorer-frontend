@@ -32,7 +32,7 @@
 }
 
 .tech__text-title {
-  margin: 80px 0 0 0;
+  margin: 90px 0 0 0;
   color: #FFF;
   text-align: center;
   font-size: 50px;
@@ -44,16 +44,16 @@
 }
 
 .tech__text {
-  margin: 22px 0 83px 0;
+  margin: 28px 0 100px 0;
   max-width: 460px;
   color: #FFF;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   font-family: Inter;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
-  letter-spacing: -0.48px;
+  line-height: 20px;
+  letter-spacing: -0.56px;
 }
 
 .tech__items {
@@ -97,22 +97,33 @@
 
   .tech__items {
     grid-template-columns: repeat(auto-fit, minmax(84px, auto));
-  }
-  
-  .tech__item {
     min-height: 57px;
   }
-
+  
+  .tech__text-title {
+    margin-top: 80px;
+  }
+  
   .tech__text {
+    margin: 22px 0 81px 0;
     font-size: 12px;
     line-height: 18px;
+    letter-spacing: -0.48px;
+  }
+
+  .tech__item {
+    font-size: 12px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     letter-spacing: -0.48px;
   }
 }
 
 @media (max-width: 600px) {
   .tech__content {
-    padding: 70px 14px;
+    padding: 70px 18px;
   }
 
   .tech__title {
@@ -123,15 +134,26 @@
     letter-spacing: -0.72px;
   }
 
+  .tech__items {
+    max-width: 270px;
+  }
+
   .tech__text-title {
     font-size: 30px;
     line-height: normal;
     letter-spacing: -1.2px;
+    margin-top: 60px;
   }
   
   .tech__text {
     font-size: 11px;
     line-height: 16px;
-    letter-spacing: -0.44px;    
+    letter-spacing: -0.44px;
+    margin-top: 24px;
+    margin-bottom: 50px;
+  }
+
+  .tech__item {
+    min-height: 57px;
   }
 }

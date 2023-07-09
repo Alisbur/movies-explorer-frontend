@@ -119,10 +119,10 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   list-style: none;
   padding-left: 0;
-  margin-top: 50px;
+  margin-top: 45px;
 }
 
 .student__portfolio-item {
@@ -130,7 +130,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 9px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(66, 66, 66, 1);
 }
 
@@ -228,6 +228,7 @@
     flex-direction: column-reverse;
     align-content: center;
     margin-top: 60px;
+    gap: 51px;
   }
 
   .student__photo {
@@ -238,7 +239,7 @@
   }
 
   .student__about {
-    gap: 16px;
+    gap: 20px;
   }
 
   .student__name {
@@ -265,10 +266,16 @@
 
   .student__portfolio-title {
     margin-top: 70px;
+    font-size: 14px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
   }
 
   .student__portfolio {
     margin-top: 40px;
+    gap: 20px;
   }  
 
   .student__portfolio-item {
@@ -289,6 +296,6 @@
   .student__portfolio-link {
     width: 18px;
     height: 28px;
-    background-size: 70%;
+    background-size: 60%;
   }
 }
