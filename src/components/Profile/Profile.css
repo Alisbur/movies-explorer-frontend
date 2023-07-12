@@ -1,0 +1,155 @@
+.profile {
+  margin: 0;
+  width: 100%;
+}
+
+.profile__content {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  padding: 74px 30px 70px 30px;
+  box-sizing: border-box;
+}
+
+.profile__title {
+  margin: 0;
+  color: #FFF;
+  text-align: center;
+  font-size: 24px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.profile__data {
+  margin: 123px 0 0 0;
+  min-width: 410px;
+  list-style: none;
+  padding: 0;
+  display:flex;
+  flex-direction: column;
+}
+
+.profile__item {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 17px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(66, 66, 66, 1);
+}
+
+.profile__item:first-of-type {
+  padding-top: 0;
+}
+
+.profile__item:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.profile__item-content {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile__item-name {
+  margin: 0;
+  color: #FFF;
+  font-size: 11px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.profile__item-data {
+  margin: 0;
+  color: #FFF;
+  text-align: right;
+  font-size: 11px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  max-width: 40ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile__edit {
+  margin: 220px 0 0 0;
+  color: #FFF;
+  text-align: center;
+  font-size: 13px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;  
+}
+
+.profile__exit {
+  margin: 16px 0 0 0;
+  color: #EE3465;
+  text-align: center;
+  font-size: 13px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+@media (max-width: 1000px) {
+  .profile__content {
+    padding-top: 236px;
+    padding-bottom: 269px;
+  }  
+
+  .profile__data {
+    margin-top: 96px;
+  }  
+
+  .profile__edit {
+    margin-top: 210px
+  }  
+}
+
+@media (max-width: 600px) {
+  .profile__content {
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }  
+
+  .profile__data {
+    margin-top: 80px;
+    max-width: 410px; 
+    min-width: unset;
+    width: 100%;
+  }
+
+  .profile__item-data {
+    max-width: 30ch;
+  }
+
+  .profile__edit {
+    font-size: 12px;
+  }
+
+  .profile__exit {
+    font-size: 12px;
+  }
+}
+
+
+

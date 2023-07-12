@@ -97,6 +97,9 @@
 }
 
 .navigation__films-block {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -104,10 +107,18 @@
 }
 
 .navigation__account-block {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 30px;
+}
+
+.navigation__item {
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 1000px) {

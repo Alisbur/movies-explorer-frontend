@@ -1,9 +1,9 @@
-.about {
+.aboutproject {
   margin: 0;
   width: 100%;
 }
 
-.about__content {
+.aboutproject__content {
   margin: 0 auto;
   line-height: 1;
   max-width: 1280px;
@@ -16,7 +16,7 @@
   padding: 110px 70px;
 }
 
-.about__title {
+.aboutproject__title {
   margin: 0;
   width: 100%;
   text-align: left;
@@ -31,19 +31,19 @@
   letter-spacing: -0.88px;
 }
 
-.about__desc-grid {
+.aboutproject__desc-grid {
   width: 100%;
   display: grid;
   row-gap: 26px;
   column-gap: 40px;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    "about__parts-title about__time-title"
-    "about__parts-text about__time-text";
+    "aboutproject__parts-title aboutproject__time-title"
+    "aboutproject__parts-text aboutproject__time-text";
 }
 
-.about__parts-title {
-  grid-area: about__parts-title;
+.aboutproject__parts-title {
+  grid-area: aboutproject__parts-title;
   margin: 0;
   color: #FFF;
   font-size: 20px;
@@ -54,8 +54,8 @@
   letter-spacing: -0.8px;
 }
 
-.about__time-title {
-  grid-area: about__time-title;
+.aboutproject__time-title {
+  grid-area: aboutproject__time-title;
   margin: 0;
   color: #FFF;
   font-size: 20px;
@@ -66,8 +66,8 @@
   letter-spacing: -0.8px;
 }
 
-.about__parts-text {
-  grid-area: about__parts-text;
+.aboutproject__parts-text {
+  grid-area: aboutproject__parts-text;
   margin: 0;
   color: #FFF;
   font-size: 14px;
@@ -77,8 +77,8 @@
   line-height: 20px;
 }
 
-.about__time-text {
-  grid-area: about__time-text;
+.aboutproject__time-text {
+  grid-area: aboutproject__time-text;
   margin: 0;
   color: #FFF;
   font-size: 14px;
@@ -88,7 +88,7 @@
   line-height: 20px;
 }
 
-.about__schedule-grid {
+.aboutproject__schedule-grid {
   margin: 40px 0 0 0;
   padding: 0;
   width: 100%;
@@ -100,12 +100,12 @@
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 36px auto;
   grid-template-areas:
-    "about__back-time about__front-time"
-    "about__back-caption about__front-caption";
+    "aboutproject__back-time aboutproject__front-time"
+    "aboutproject__back-caption aboutproject__front-caption";
 }
 
-.about__back-time {
-  grid-area: about__back-time;
+.aboutproject__back-time {
+  grid-area: aboutproject__back-time;
   margin: 0;
   height: 100%;
   width: 100%;
@@ -123,8 +123,8 @@
   background-color: #3DDC84;
 }
 
-.about__front-time {
-  grid-area: about__front-time;
+.aboutproject__front-time {
+  grid-area: aboutproject__front-time;
   margin: 0;
   height: 100%;
   width: 100%;
@@ -142,8 +142,8 @@
   background-color: #303030;
 }
 
-.about__back-caption {
-  grid-area: about__back-caption;
+.aboutproject__back-caption {
+  grid-area: aboutproject__back-caption;
   height: 100%;
   margin: 0;
   color: #8B8B8B;
@@ -157,8 +157,8 @@
   padding-left: 0;
 }
 
-.about__front-caption {
-  grid-area: about__front-caption;
+.aboutproject__front-caption {
+  grid-area: aboutproject__front-caption;
   height: 100%;
   margin: 0;
   color: #8B8B8B;
@@ -173,43 +173,43 @@
 }
 
 @media (max-width: 1000px) {
-  .about__content {
+  .aboutproject__content {
     padding: 90px 50px;
   }
 
-  .about__desc-grid {
+  .aboutproject__desc-grid {
     row-gap: 22px;
     column-gap: 30px;
   }
 
-  .about__schedule-grid {
+  .aboutproject__schedule-grid {
     margin-top: 23px;
   }
 
-  .about__parts-text, .about__time-text {
+  .aboutproject__parts-text, .aboutproject__time-text {
     font-size: 12px;
     line-height: 18px;
   }
 
-  .about__back-caption, .about__front-caption {
+  .aboutproject__back-caption, .aboutproject__front-caption {
     color: #A0A0A0;
     font-family: Suisse Intl;
     font-weight: 400;
     line-height: 17px;
   }
 
-  .about__back-time {
+  .aboutproject__back-time {
     min-width: 142px;
   }
 }
 
 @media (max-width: 600px) {
-  .about__content {
+  .aboutproject__content {
     padding: 70px 18px 70px 18px;
     gap: 60px;
   }
 
-  .about__title {
+  .aboutproject__title {
     min-width: 284px;
     padding-bottom: 28px;
     color: #FFF;
@@ -217,41 +217,41 @@
     letter-spacing: -0.72px;
   }
 
-  .about__desc-grid {
+  .aboutproject__desc-grid {
     row-gap: 18px;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     grid-template-areas:
-      "about__parts-title"
-      "about__parts-text"
-      "about__time-title"
-      "about__time-text";
+      "aboutproject__parts-title"
+      "aboutproject__parts-text"
+      "aboutproject__time-title"
+      "aboutproject__time-text";
   }
 
-  .about__parts-title, .about__time-title {
+  .aboutproject__parts-title, .aboutproject__time-title {
     font-size: 18px;
     letter-spacing: -0.72px;
   }
   
-  .about__time-title {
+  .aboutproject__time-title {
     padding-top: 37px;
   }
 
-  .about__parts-text, .about__time-text {
+  .aboutproject__parts-text, .aboutproject__time-text {
     font-size: 11px;
     line-height: 16px;
   }
 
-  .about__back-caption, .about__front-caption, .about__back-time, .about__front-time {
+  .aboutproject__back-caption, .aboutproject__front-caption, .aboutproject__back-time, .aboutproject__front-time {
     font-size: 11px;
     line-height: normal;
   } 
 
-  .about__back-time {
+  .aboutproject__back-time {
     min-width: 100px;
   }
 
-  .about__schedule-grid {
+  .aboutproject__schedule-grid {
     row-gap: 8px;
     margin: 0;
   }

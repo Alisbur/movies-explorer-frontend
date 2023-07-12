@@ -11,8 +11,8 @@ function Footer() {
         <div className="footer__credentials">
           <span className="footer__copyright">&#64; {currentYear}</span>
           <ul className="footer__nav-links">
-            <li><NavLink to="#" className="footer__nav-link link-transparency">Яндекс.Практикум</NavLink></li>
-            <li><NavLink to="#" className="footer__nav-link link-transparency">Github</NavLink></li>
+            <li><NavLink to="https://practicum.yandex.ru" className="footer__nav-link link-transparency" target="_blank">Яндекс.Практикум</NavLink></li>
+            <li><NavLink to="https://github.com" className="footer__nav-link link-transparency" target="_blank">Github</NavLink></li>
           </ul>
         </div>
       </div>

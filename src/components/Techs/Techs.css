@@ -1,10 +1,10 @@
-.tech {
+.techs {
   margin: 0;
   width: 100%;
   background-color: #272727;
 }
 
-.tech__content {
+.techs__content {
   margin: 0 auto;
   line-height: 1;
   max-width: 1280px;
@@ -16,7 +16,7 @@
   padding: 100px 70px;
 }
 
-.tech__title {
+.techs__title {
   margin: 0;
   width: 100%;
   text-align: left;
@@ -31,7 +31,7 @@
   letter-spacing: -0.88px;
 }
 
-.tech__text-title {
+.techs__text-title {
   margin: 90px 0 0 0;
   color: #FFF;
   text-align: center;
@@ -43,7 +43,7 @@
   letter-spacing: -2px;
 }
 
-.tech__text {
+.techs__text {
   margin: 28px 0 100px 0;
   max-width: 460px;
   color: #FFF;
@@ -56,7 +56,7 @@
   letter-spacing: -0.56px;
 }
 
-.tech__items {
+.techs__items {
   margin: 0;
   padding: 0;
   display: grid;
@@ -69,7 +69,7 @@
   list-style: none;
 }
 
-.tech__item {
+.techs__item {
   margin: 0;
   min-height: 60px;
   width: 100%;
@@ -91,27 +91,27 @@
 
 
 @media (max-width: 1000px) {
-  .tech__content {
+  .techs__content {
     padding: 90px 50px;
   }
 
-  .tech__items {
+  .techs__items {
     grid-template-columns: repeat(auto-fit, minmax(84px, auto));
     min-height: 57px;
   }
   
-  .tech__text-title {
+  .techs__text-title {
     margin-top: 80px;
   }
   
-  .tech__text {
+  .techs__text {
     margin: 22px 0 81px 0;
     font-size: 12px;
     line-height: 18px;
     letter-spacing: -0.48px;
   }
 
-  .tech__item {
+  .techs__item {
     font-size: 12px;
     font-family: Inter;
     font-style: normal;
@@ -122,11 +122,11 @@
 }
 
 @media (max-width: 600px) {
-  .tech__content {
+  .techs__content {
     padding: 70px 18px;
   }
 
-  .tech__title {
+  .techs__title {
     min-width: 284px;
     padding-bottom: 28px;
     color: #FFF;
@@ -134,18 +134,18 @@
     letter-spacing: -0.72px;
   }
 
-  .tech__items {
+  .techs__items {
     max-width: 270px;
   }
 
-  .tech__text-title {
+  .techs__text-title {
     font-size: 30px;
     line-height: normal;
     letter-spacing: -1.2px;
     margin-top: 60px;
   }
   
-  .tech__text {
+  .techs__text {
     font-size: 11px;
     line-height: 16px;
     letter-spacing: -0.44px;
@@ -153,7 +153,7 @@
     margin-bottom: 50px;
   }
 
-  .tech__item {
+  .techs__item {
     min-height: 57px;
   }
 }

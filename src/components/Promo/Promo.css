@@ -1,10 +1,10 @@
-.hero {
+.promo {
   margin: 0;
   width: 100%;
   background-color: #073042;
 }
 
-.hero__content {
+.promo__content {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
   overflow: hidden;
 }
 
-.hero__title {
+.promo__title {
   margin: 0;
   max-width: 626px;
   color: #FFF;
@@ -30,25 +30,25 @@
   align-self: self-start;
 }
 
-.hero__pic {
+.promo__pic {
   min-width: 722px;
   max-height: 244px;
   align-self: self-end;
 }
 
 @media (max-width: 1000px) {
-  .hero__content {
+  .promo__content {
     padding: 300px 44px 70px 44px;
     gap: 140px;
   }
 
-  .hero__title {
+  .promo__title {
     max-width: 680px;
     text-align: center;
     align-self: center;
   }
 
-  .hero__pic {
+  .promo__pic {
     align-self: center;
     min-width: 680px;
     min-height: 230px;
@@ -56,12 +56,12 @@
 }
 
 @media (max-width: 600px) {
-  .hero__content {
+  .promo__content {
     padding: 183px 10px 40px 10px;
     gap: 60px;
   }
 
-  .hero__title {
+  .promo__title {
     min-width: 300px;
     font-size: 31px;
     line-height: 39px;

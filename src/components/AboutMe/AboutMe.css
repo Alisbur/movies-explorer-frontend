@@ -1,18 +1,18 @@
-.student {
+.aboutme {
   margin: 0;
   width: 100%;
   background-color: #202020;
 }
 
-.student__content {
+.aboutme__content {
   margin: 0 auto;
   line-height: 1;
   max-width: 1280px;
   box-sizing: border-box;
-  padding: 110px 70px 125px 70px;
+  padding: 110px 70px 70px 70px;
 }
 
-.student__title {
+.aboutme__title {
   margin: 0;
   width: 100%;
   text-align: left;
@@ -27,7 +27,7 @@
   letter-spacing: -0.88px;
 }
 
-.student__profile {
+.aboutme__profile {
   margin: 0;
   width: 100%;
   display: flex;
@@ -38,21 +38,21 @@
   margin-top: 66px;
 }
 
-.student__data {
+.aboutme__data {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.student__about {
+.aboutme__about {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 18px;
 }
 
-.student__name {
+.aboutme__name {
   margin: 0;
   max-width: 600px;
   color: #FFF;
@@ -64,7 +64,7 @@
   letter-spacing: -2px;  
 }
 
-.student__brief {
+.aboutme__brief {
   margin: 0;
   max-width: 600px;
   color: #FFF;
@@ -75,7 +75,7 @@
   line-height: 20px;    
 }
 
-.student__biography {
+.aboutme__biography {
   margin: 0;
   max-width: 600px;
   padding-top: 8px;
@@ -87,7 +87,7 @@
   line-height: 22px;
 }
 
-.student__link {
+.aboutme__link {
   margin: 0;
   color: #FFF;
   font-size: 14px;
@@ -98,77 +98,22 @@
   text-decoration: none;  
 }
 
-.student__photo {
+.aboutme__photo {
   margin: 0;
   max-height: 327px;
   border-radius: 10px;
 }
 
-.student__portfolio-title {
-  margin: 0;
-  color: #8B8B8B;
-  font-size: 18px;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;  
-  margin-top: 100px;
-}
-
-.student__portfolio {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  list-style: none;
-  padding-left: 0;
-  margin-top: 45px;
-}
-
-.student__portfolio-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(66, 66, 66, 1);
-}
-
-.student__portfolio-item:last-of-type {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.student__portfolio-item-name {
-  margin: 0;
-  color: #FFF;
-  font-size: 30px;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 50px;
-  letter-spacing: -1.2px;  
-}
-
-.student__portfolio-link {
-  width: 29px;
-  height: 60px;
-  background-image: url(../../images/arrow.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: transparent;
-}
-
 @media (max-width: 1000px) {
-  .student__content {
-    padding: 90px 50px;
+  .aboutme__content {
+    padding: 90px 50px 70px 50px;
   }
 
-  .student__about {
+  .aboutme__about {
     gap: 16px;
   }
 
-  .student__name {
+  .aboutme__name {
     margin: 0;
     color: #FFF;
     font-size: 40px;
@@ -179,7 +124,7 @@
     letter-spacing: -1.6px;
   }
 
-  .student__brief {
+  .aboutme__brief {
     margin: 0;
     color: #FFF;
     font-size: 12px;
@@ -189,7 +134,7 @@
     line-height: 18px;
   }
 
-  .student__biography {
+  .aboutme__biography {
     margin: 0;
     padding-top: 4px;
     color: #FFF;
@@ -200,23 +145,19 @@
     line-height: 18px;
   }
 
-  .student__photo {
+  .aboutme__photo {
     margin: 0;
     max-height: 307px;
     border-radius: 10px;
   }
-
-  .student__portfolio-title {
-    margin-top: 90px;
-  }
 }
 
 @media (max-width: 600px) {
-  .student__content {
+  .aboutme__content {
     padding: 70px 14px;
   }
 
-  .student__title {
+  .aboutme__title {
     min-width: 284px;
     padding-bottom: 28px;
     color: #FFF;
@@ -224,78 +165,43 @@
     letter-spacing: -0.72px;
   }
 
-  .student__profile {
+  .aboutme__profile {
     flex-direction: column-reverse;
     align-content: center;
     margin-top: 60px;
     gap: 51px;
   }
 
-  .student__photo {
+  .aboutme__photo {
     margin: 0;
     width: 100%;
     max-height: none;
     border-radius: 10px;
   }
 
-  .student__about {
+  .aboutme__about {
     gap: 20px;
   }
 
-  .student__name {
+  .aboutme__name {
     font-size: 30px;
     line-height: normal;
     letter-spacing: -1.2px;
   }
 
-  .student__brief {
+  .aboutme__brief {
     font-size: 11px;
     line-height: 16px;
   }
 
-  .student__biography {
+  .aboutme__biography {
     padding-top: 0;
     color: #FFF;
     font-size: 11px;
     line-height: 16px;
   }
 
-  .student__link {
+  .aboutme__link {
     margin-top: 40px;
-  }
-
-  .student__portfolio-title {
-    margin-top: 70px;
-    font-size: 14px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-  }
-
-  .student__portfolio {
-    margin-top: 40px;
-    gap: 20px;
-  }  
-
-  .student__portfolio-item {
-    padding-bottom: 19px;
-  }
-  
-  .student__portfolio-item-name {
-    margin: 0;
-    color: #FFF;
-    font-size: 18px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.72px;
-  }
-  
-  .student__portfolio-link {
-    width: 18px;
-    height: 28px;
-    background-size: 60%;
   }
 }

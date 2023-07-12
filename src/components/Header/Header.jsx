@@ -6,9 +6,9 @@ import Navigation from '../Navigation/Navigation';
 
 function Header(props) {
   return (
-    <header className="header">
+    <header className={props.promo ? 'header' : 'header_background_promo'}>
       <div className="header__content">
-        <img src={logo} className="header__logo" alt="Логотип Movie Explorer" />
+        <NavLink to="#"><img src={logo} className="header__logo" alt="Логотип Movie Explorer" /></NavLink>
         <Navigation />
       </div>
     </header>

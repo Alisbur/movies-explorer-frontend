@@ -5,20 +5,46 @@ import React from 'react';
 function Navigation(props) {
   return (
     <nav className="navigation">
+      <ul className="navigation__films-block">
+        <li className="navigation__item">
+          <NavLink to="#" className="navigation__link link-transparency navigation__link_active">Фильмы</NavLink>
+        </li>
+        <li className="navigation__item">
+          <NavLink to="#" className="navigation__link link-transparency">Сохранённые фильмы</NavLink>
+        </li>
+      </ul>
+      
+
+      <ul className="navigation__account-block">
+        <li className="navigation__item">
+          <NavLink to="#" className="navigation__signup link-transparency">Регистрация</NavLink>
+        </li>
+        <li className="navigation__item">
+          <button type="button" className="navigation__signin-button button-transparency">Войти</button>
+        </li>
+        <li className="navigation__item">
+          <button type="button" className="navigation__account-button button-transparency">Аккаунт</button>
+        </li>
+        <li className="navigation__item">
+          <button type="button" className="navigation__burger-button button-transparency" />
+        </li>
+      </ul>
+    </nav>
+  );
+}
+/*
+
+      
       <div className="navigation__films-block">
         <NavLink to="#" className="navigation__link link-transparency navigation__link_active">Фильмы</NavLink>
         <NavLink to="#" className="navigation__link link-transparency">Сохранённые фильмы</NavLink>
       </div>
-      <div className="navigation__account-block">
+            <div className="navigation__account-block">
         <NavLink to="#" className="navigation__signup link-transparency">Регистрация</NavLink>
         <button type="button" className="navigation__signin-button button-transparency">Войти</button>
         <button type="button" className="navigation__account-button button-transparency">Аккаунт</button>
         <button type="button" className="navigation__burger-button button-transparency" />
       </div>
-    </nav>
-  );
-}
-/*
 
 function Header(props) {
 
