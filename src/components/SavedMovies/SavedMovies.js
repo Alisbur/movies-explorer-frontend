@@ -6,7 +6,7 @@ function SavedMovies(props) {
   return (
     <>
       <MoviesCardList drawSaved={true}/>
-      <Preloader />
+      {props.isLoading && <Preloader />}
     </>
   );
 }

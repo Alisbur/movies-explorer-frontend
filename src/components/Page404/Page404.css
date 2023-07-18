@@ -1,10 +1,11 @@
 .page404 {
-  max-width: 1280px;
+  width:100%;
   background-color: #202020;
 }
 
 .page404__content {
-  width:100%;
+  max-width: 1280px;
+  padding: 246px 70px 60px 70px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -12,7 +13,8 @@
 }
 
 .page404__title {
-  margin: 246px 0 0 0;
+  margin: 0;
+  padding: 0;
   color: #FFF;
   text-align: center;
   font-size: 140px;
@@ -43,14 +45,18 @@
 }
 
 @media (max-width: 1000px) {
-  .page404__title {
-    margin-top: 408px;  
+  .page404__content {
+    max-width: 1280px;
+    padding: 408px 30px 222px 30px;
   }
 }
 
 @media (max-width: 600px) {
+  .page404__content {
+    padding: 329px 30px 30px 30px;
+  }
+
   .page404__title {
-    margin-top: 329px;  
     font-size: 80px;
   }
   

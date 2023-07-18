@@ -1,30 +1,30 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
-import React from 'react';
-import films from '../../utils/dev_const'
-/*import { CurrentUserContext } from '../contexts/CurrentUserContext.js';*/
+import React, { useState, useEffect } from 'react';
+import films from '../../utils/dev_const' //Временные данные
 
 function MoviesCardList(props) {
 
-/*  const currentUser = React.useContext(CurrentUserContext);*/
+  const [numberOfFilmsToShow, setNumberOfFilmsToShow] = useState(16);
+
+  useEffect(()=>{
+    setNumberOfFilmsToShow(16);
+  },[]);
 
   return (
     <main className="movies-card-list">
       <section className="movies-card-list__content" aria-label="Галерея фотографий">
         <div className="movies-card-list__items">
           {
-            films.map((el, i) =>
+            films.slice(0, numberOfFilmsToShow).map((el, i) =>
               <MoviesCard
-                key={el._id}
+                key={i}
                 card={el}
                 drawSaved={props.drawSaved}
-    /*            onCardClick={props.onCardClick}
-                onCardLike={props.onCardLike}
-                onCardDelete={props.onCardDelete}*/
               />)
           }
         </div>
-        <button type="button" className="movies-card-list__more-button button-transparency" aria-label="Загрузить больше фильмов">Ещё</button>
+        <button type="button" onClick={()=>setNumberOfFilmsToShow(numberOfFilmsToShow+8)} className="movies-card-list__more-button button-transparency" aria-label="Загрузить больше фильмов">Ещё</button>
       </section>
     </main>
   );

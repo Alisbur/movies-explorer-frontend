@@ -1,5 +1,5 @@
 import './SearchForm.css';
-import {NavLink} from "react-router-dom";
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
 
@@ -11,11 +11,7 @@ function SearchForm() {
             <input type="text" className="search-form__input" placeholder="Фильм" name="search-form-input" required />
             <button type="submit" className="search-form__button button-transparency" name="search-form-button" />
           </fieldset>
-          <label className="search-form__label button-transparency">
-            Короткометражки
-            <input type="checkbox" className="search-form__checkbox_type_hidden" />
-            <span className="search-form__checkbox_type_custom" />
-          </label>
+          <FilterCheckbox />
         </form>
       </div>
     </section>

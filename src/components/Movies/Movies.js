@@ -7,8 +7,8 @@ function Movies(props) {
   return (
     <>
       <SearchForm />
-      <MoviesCardList drawSaved={true}/>
-      <Preloader />
+      <MoviesCardList drawSaved={false}/>
+      {props.isLoading && <Preloader />}
     </>
   );
 }

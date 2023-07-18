@@ -79,10 +79,6 @@
   color: #EE3465;
 }
 
-.register__input:focus {
-  outline: none;
-}
-
 .register__input-error {
   margin: 0;
   color: #EE3465;

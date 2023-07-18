@@ -1,68 +1,115 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate, useLocation, Routes, Route } from "react-router-dom";
+import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import './App.css';
 
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import Page404 from '../Page404/Page404';
-import Preloader from '../Preloader/Preloader';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
-import Search from '../SearchForm/SearchForm';
-import More from '../More/More';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-import Cards from '../MoviesCardList/MoviesCardList';
-import Footer from '../Footer/Footer';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import InfoToolTip from '../InfoToolTip/InfoTooltip';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
-import AuthForm from '../AuthForm/AuthForm';
-/*import EditProfilePopup from './EditProfilePopup.js';
-import EditAvatarPopup from './EditAvatarPopup.js';
-import AddPlacePopup from './AddPlacePopup.js';
-import ConfirmPopup from './ConfirmPopup.js';
-import ImagePopup from './ImagePopup.js';
-import api from '../utils/Api.js';
-import auth from '../utils/Auth.js';*/
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-/*import InfoTooltip from './InfoTooltip.js';*/
-
+/* Заготовка на будущее
 function handleRegisterSubmit() { };
 function handleLoginSubmit() { };
-function handleEditProfileClick() { };
-function handleAddPlaceClick() { };
-function handleEditAvatarClick() { };
-function handleCardClick() { };
-function handleCardLike() { };
+function handleCardSave() { };
 function handleCardDelete() { };
-
+*/
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState({ name: '', about: '', avatar: '', _id: '' });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [currentUser, setCurrentUser] = useState({ name: 'Alisbur', email: 'test@test.test', _id: '12345' });
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState('');
+
+  //Определяем текущую страницу
+  React.useEffect(() => {
+    setPage(location.pathname);
+  }, [location]);
+
+  //Добавляем лисенер нажатия на кнопки для закрытия попапов по Esc 
+  React.useEffect(() => {
+    document.addEventListener("keydown", handleEscPress);
+  }, [])
+
+  //Обработчик нажатия на кнопку Esc
+  function handleEscPress(e) {
+    if (e.key === 'Escape') {
+      closeAllPopups();
+    }
+  }
+
+  //Обработчик закрытия попапов и бургера
+  function closeAllPopups() {
+    setInfoTooltipOpen(false);
+    setIsBurgerOpen(false);
+  }
+
+  //Обработчик нажатия на кнопку бургера
+  function handleBurgerClick(currentState) {
+    currentState
+      ? setIsBurgerOpen(false)
+      : setIsBurgerOpen(true);
+  }
+
+  //Заглушка обработчика регистрации
+  function handleRegister() {
+    setInfoTooltipOpen(true);
+    navigate("/", {replace:true});
+  }
+
+  //Заглушка обработчика логина
+  function handleLogin() {
+    setIsLoggedIn(true);
+    navigate("/", {replace:true});
+  }
+
+  //Заглушка обработчика логаута
+  function handleLogout() {
+    setIsLoggedIn(false);
+    navigate("/", {replace:true});
+  }
+
+  //Заглушка обработчика редактирования данных пользователя
+  function handleUpdateUserData(name, email) {
+    setCurrentUser({...currentUser, ['name']: name, ['email']: email})
+    navigate("/", {replace:true});
+  }
 
   return (
     <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header isPromo={true} />
-        <Movies />
-        <Footer />
+      {((location.pathname==='/')||(location.pathname==='/movies')||(location.pathname==='/saved-movies')||(location.pathname==='/profile')) && (<Header loggedIn={isLoggedIn} isBurgerOpen={isBurgerOpen} burgerClick={handleBurgerClick}/>)}
+
+        <Routes>
+          <Route path="/signup" element={<Register submitBtnCap='Зарегистрироваться' register={handleRegister} title="Регистрация" />} />
+          <Route path="/signin" element={<Login submitBtnCap='Войти' login={handleLogin} title="Вход" />} />
+          <Route path="/" element={<Main loggedIn={isLoggedIn} />} />
+          <Route path="*" element={<Page404 prev="/" />} />
+          <Route path="/profile" element={<ProtectedRouteElement element={Profile} updateUserData={handleUpdateUserData} logout={handleLogout} loggedIn={isLoggedIn} />} />
+          <Route path="/movies" element={<ProtectedRouteElement element={Movies} loggedIn={isLoggedIn} isLoading={true} />} />
+          <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies} loggedIn={isLoggedIn} />} />
+        </Routes>
       </CurrentUserContext.Provider>
+      
+      {((location.pathname==='/')||(location.pathname==='/movies')||(location.pathname==='/saved-movies')) && (<Footer />)}
+      
+      <InfoToolTip isOpen={isInfoTooltipOpen} isOk={true} onClose={closeAllPopups} />
     </div>
   );
 }
-
-/*
-        <Page404 />
-        <Preloader />
-        <Register submitBtnCap='Зарегистрироваться' title="Добро пожаловать!" onSubmit={()=>{}} />
-        <Login submitBtnCap='Войти' title="Рады видеть!" onSubmit={()=>{}} />
-        <Profile />
-        <Search />
-        <Cards />
-        <More />
-*/
 
 export default App;

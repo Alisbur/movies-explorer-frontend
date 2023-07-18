@@ -1,10 +1,10 @@
 import photo from '../../images/me.jpg';
 import './AboutMe.css';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function AboutMe() {
   return (
-    <section className="aboutme" aria-label="Информация о студенте">
+    <section className="aboutme" aria-label="Информация обо мне">
       <div className="aboutme__content">
         <h2 className="aboutme__title">Студент</h2>
         <div className="aboutme__profile">

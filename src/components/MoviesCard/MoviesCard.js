@@ -3,9 +3,6 @@ import React from 'react';
 
 function MoviesCard(props) {
 
-  const isOwn = undefined;
-  const isLiked = undefined;
-
   const timeToStr = (min) => `${Math.floor(min/60)>0 ? Math.floor(min/60)+"ч" : ""} ${min%60>0 ? min%60+"мин" : ""}`;
 
   return (

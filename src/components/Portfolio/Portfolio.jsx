@@ -1,4 +1,3 @@
-import photo from '../../images/me.jpg';
 import './Portfolio.css';
 import {NavLink} from 'react-router-dom';
 
@@ -18,7 +17,7 @@ function Portfolio() {
           </li>
           <li className="portfolio__item">
             <span className="portfolio__item-name">Одностраничное приложение</span>
-            <NavLink to="https://alisbur.github.io/react-mesto-auth/cards" className="portfolio__link link-transparency" target="_blank" />
+            <NavLink to="https://alisbur.github.io/mesto/" className="portfolio__link link-transparency" target="_blank" />
           </li>                
         </ul>
       </div>
