@@ -30,67 +30,67 @@ function Header(props) {
 
   return (
     <header className={`header ${location.pathname==="/" ? "header_background_promo" : ""}`}>
-      <div className="header__content">
-          <NavLink to="/"><img src={logo} className="header__logo" alt="Логотип Movie Explorer" /></NavLink>
-          {!props.loggedIn
-          ?
+      <nav className="header__content">
+        <NavLink to="/"><img src={logo} className="header__logo" alt="Логотип Movie Explorer" /></NavLink>
+        {!props.loggedIn
+        ?
+          (
+            <ul className="header__auth-items">
+              <li className="header__auth-item">
+                <NavLink to="/signup" className="header__signup link-transparency">Регистрация</NavLink>
+              </li>
+              <li className="navigation__item">
+                <button type="button" className="header__signin-button button-transparency" onClick={()=>{navigate("/signin", {replace:true});}}>Войти</button>
+              </li>                
+            </ul>
+          )
+        : width>1000
+          ? 
             (
-              <ul className="header__auth-items">
-                <li className="header__auth-item">
-                  <NavLink to="/signup" className="header__signup link-transparency">Регистрация</NavLink>
-                </li>
-                <li className="navigation__item">
-                  <button type="button" className="header__signin-button button-transparency" onClick={()=>{navigate("/signin", {replace:true});}}>Войти</button>
-                </li>                
-              </ul>
+              <div className="header__nav">
+                <ul className="header__film-link-items">
+                  <li className="header__film-link-item">
+                    <NavLink to="/movies" className={`header__film-link ${location.pathname==="/movies" ? "header__film-link_type_active" : "link-transparency"}`}>Фильмы</NavLink>
+                  </li>
+                  <li className="header__film-link-item">
+                    <NavLink to="/saved-movies" className={`header__film-link ${location.pathname==="/saved-movies" ? "header__film-link_type_active" : "link-transparency"}`}>Сохранённые фильмы</NavLink>
+                  </li>
+                </ul>
+                <button type="button" className="header__account-button button-transparency" onClick={()=>{navigate("/profile", {replace:true})}}>Аккаунт</button>
+              </div>
             )
-          : width>1000
-            ? 
-              (
-                <div className="header__nav">
-                  <ul className="header__film-link-items">
-                    <li className="header__film-link-item">
-                      <NavLink to="/movies" className={`header__film-link ${location.pathname==="/movies" ? "header__film-link_type_active" : "link-transparency"}`}>Фильмы</NavLink>
-                    </li>
-                    <li className="header__film-link-item">
-                      <NavLink to="/saved-movies" className={`header__film-link ${location.pathname==="/saved-movies" ? "header__film-link_type_active" : "link-transparency"}`}>Сохранённые фильмы</NavLink>
-                    </li>
-                  </ul>
-                  <button type="button" className="header__account-button button-transparency" onClick={()=>{navigate("/profile", {replace:true})}}>Аккаунт</button>
-                </div>
-              )
-            : 
-              props.isBurgerOpen
-                ? 
-                  ( 
-                    <div className="header__nav header__nav_type_burger">
-                      <div className="header__burger-background">
-                        <div className="header__burger-menu">
-                          <button type="button" className="header__burger-button header__burger-button_type_close button-transparency" onClick={handleBurgerClick}/>
-                          <ul className="header__film-link-items header__film-link-items_type_burger">
-                            <li className="header__film-link-item">
-                              <NavLink to="/" className={`header__film-link ${location.pathname==="/" ? "header__film-link_type_active" : "link-transparency"}`}>Главная</NavLink>
-                            </li>
-                            <li className="header__film-link-item">
-                              <NavLink to="/movies" className={`header__film-link ${location.pathname==="/movies" ? "header__film-link_type_active" : "link-transparency"}`}>Фильмы</NavLink>
-                            </li>
-                            <li className="header__film-link-item">
-                              <NavLink to="/saved-movies" className={`header__film-link ${location.pathname==="/saved-movies" ? "header__film-link_type_active" : "link-transparency"}`}>Сохранённые фильмы</NavLink>
-                            </li>
-                          </ul>
-                          <button type="button" className="header__account-button button-transparency" onClick={()=>{navigate("/profile", {replace:true})}}>Аккаунт</button>
-                        </div>
+          : 
+            props.isBurgerOpen
+              ? 
+                ( 
+                  <div className="header__nav header__nav_type_burger">
+                    <div className="header__burger-background">
+                      <div className="header__burger-menu">
+                        <button type="button" className="header__burger-button header__burger-button_type_close button-transparency" onClick={handleBurgerClick}/>
+                        <ul className="header__film-link-items header__film-link-items_type_burger">
+                          <li className="header__film-link-item">
+                            <NavLink to="/" className={`header__film-link ${location.pathname==="/" ? "header__film-link_type_active" : "link-transparency"}`}>Главная</NavLink>
+                          </li>
+                          <li className="header__film-link-item">
+                            <NavLink to="/movies" className={`header__film-link ${location.pathname==="/movies" ? "header__film-link_type_active" : "link-transparency"}`}>Фильмы</NavLink>
+                          </li>
+                          <li className="header__film-link-item">
+                            <NavLink to="/saved-movies" className={`header__film-link ${location.pathname==="/saved-movies" ? "header__film-link_type_active" : "link-transparency"}`}>Сохранённые фильмы</NavLink>
+                          </li>
+                        </ul>
+                        <button type="button" className="header__account-button button-transparency" onClick={()=>{navigate("/profile", {replace:true})}}>Аккаунт</button>
                       </div>
                     </div>
-                  )
-                : 
-                  (
-                    <div className="header__nav header__nav_type_burger">
-                      <button type="button" className="header__burger-button button-transparency" onClick={handleBurgerClick}/>
-                    </div>
-                  )
-          }
-        </div>
+                  </div>
+                )
+              : 
+                (
+                  <div className="header__nav header__nav_type_burger">
+                    <button type="button" className="header__burger-button button-transparency" onClick={handleBurgerClick}/>
+                  </div>
+                )
+        }
+      </nav>
     </header>
   );
 }

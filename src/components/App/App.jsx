@@ -95,13 +95,13 @@ function App() {
       {((location.pathname==='/')||(location.pathname==='/movies')||(location.pathname==='/saved-movies')||(location.pathname==='/profile')) && (<Header loggedIn={isLoggedIn} isBurgerOpen={isBurgerOpen} burgerClick={handleBurgerClick}/>)}
 
         <Routes>
-          <Route path="/signup" element={<Register submitBtnCap='Зарегистрироваться' register={handleRegister} title="Регистрация" />} />
-          <Route path="/signin" element={<Login submitBtnCap='Войти' login={handleLogin} title="Вход" />} />
+          <Route path="/signup" element={<Register submitBtnCap='Зарегистрироваться' register={handleRegister} title="Добро пожаловать!" />} />
+          <Route path="/signin" element={<Login submitBtnCap='Войти' login={handleLogin} title="Рады видеть!" />} />
           <Route path="/" element={<Main loggedIn={isLoggedIn} />} />
           <Route path="*" element={<Page404 prev="/" />} />
           <Route path="/profile" element={<ProtectedRouteElement element={Profile} updateUserData={handleUpdateUserData} logout={handleLogout} loggedIn={isLoggedIn} />} />
-          <Route path="/movies" element={<ProtectedRouteElement element={Movies} loggedIn={isLoggedIn} isLoading={true} />} />
-          <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies} loggedIn={isLoggedIn} />} />
+          <Route path="/movies" element={<ProtectedRouteElement element={Movies} loggedIn={isLoggedIn} loading={isLoading} />} />
+          <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies} loggedIn={isLoggedIn} loading={isLoading} />} />
         </Routes>
       </CurrentUserContext.Provider>
       

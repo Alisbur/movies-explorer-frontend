@@ -124,7 +124,7 @@
   background-color: transparent;
   border: none;
   position: relative;
-  transform: translateX(8px);
+  transform: translate(-7px, 0px);
 }
 
 .header__account-button::before {
@@ -136,7 +136,7 @@
   bottom: -8px;
   margin: 0;
   width: 100px;
-  height: 32px;
+  height: 30px;
   border-radius: 50px;
   border: 2px solid rgba(170, 170, 170, 0.2);
   background-image: url(../../images/icon__COLOR_icon-main.svg);
@@ -214,9 +214,29 @@
   }
 
   .header__film-link_type_active {
-    padding-bottom: 4px;
+    padding-bottom: 6px;
     border-bottom: solid 2px rgba(255, 255, 255, 1);
   }
+
+  .header__account-button {
+    transform: translateX(8px);
+  }  
+
+  .header__film-link {
+    font-size: 18px;
+    line-height: normal;
+    font-weight: 500;
+  }
+
+  .header__burger-menu {
+    padding-bottom: 97px;
+  }
+
+  .header__burger-button_type_close {
+    top: 15px;
+    right: 16px;
+  }
+
 }
 
 @media (max-width: 600px) {
@@ -238,9 +258,24 @@
     height: 26px;
   }
 
+  .header__burger-menu {
+    padding-top: 145px;
+    padding-bottom: 54px;
+  }
+  
   .header__burger-button_type_close {
-    top: 18px;
+    top: 12px;
     right: 14px;
+  }
+
+  .header__film-link-items_type_burger {
+    gap: 24px;
+  }
+
+  .header__burger-button {
+    width: 32px;
+    height: 32px;
+    background-size: contain;
   }
 }
 

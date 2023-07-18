@@ -48,3 +48,9 @@
 .filter-checkbox__checkbox_type_hidden:checked + .filter-checkbox__checkbox_type_custom::after {
   left: 18px;
 }
+
+@media (max-width: 600px) {
+  .filter-checkbox__label {
+    font-size: 11px;
+  }
+}

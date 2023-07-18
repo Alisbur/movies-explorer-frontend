@@ -19,7 +19,7 @@ function Login(props) {
   } 
 
   return (
-    <section className="login">
+    <section className="login" aria-label="Вход в аккаунт">
       <div className="login__content">
         <form className="login__form" name="login-form" onSubmit={handleSubmit}>
           <NavLink to="/"><img src={logo} className="login__logo" alt="лого сайта" /></NavLink>

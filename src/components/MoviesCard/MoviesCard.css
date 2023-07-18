@@ -90,3 +90,15 @@
   font-weight: 400;
   line-height: normal;
 }
+
+@media (max-width: 1000px) {
+  .movies-card__item-image {
+    height: 190px;
+  }
+}
+
+@media (max-width: 600px) {
+  .movies-card__item-image {
+    height: 168px;
+  }
+}

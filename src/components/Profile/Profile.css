@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: space-between;
   max-width: 1280px;
-  padding: 74px 30px 70px 30px;
+  padding: 72px 30px 70px 30px;
   box-sizing: border-box;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .profile__data {
-  margin: 123px 0 0 0;
+  margin: 112px 0 0 0;
   width: 410px;
   list-style: none;
   padding: 0;
@@ -39,7 +39,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-  padding-top: 17px;
+  padding-top: 10px;
   padding-bottom: 16px;
 }
 
@@ -95,7 +95,7 @@
 .profile__save-button {
   background-color: transparent;
   border: none;
-  margin: 220px 0 0 0;
+  margin: 197px 0 0 0;
   color: #FFF;
   text-align: center;
   font-size: 13px;
@@ -141,27 +141,27 @@
 
 @media (max-width: 1000px) {
   .profile__content {
-    padding-top: 236px;
+    padding-top: 232px;
     padding-bottom: 269px;
   }  
 
   .profile__data {
-    margin-top: 96px;
+    margin-top: 86px;
   }  
 
   .profile__save-button {
-    margin-top: 210px
+    margin-top: 186px
   }  
 }
 
 @media (max-width: 600px) {
   .profile__content {
-    padding-top: 70px;
+    padding-top: 68px;
     padding-bottom: 40px;
   }  
 
   .profile__data {
-    margin-top: 80px;
+    margin-top: 68px;
     max-width: 410px; 
     min-width: unset;
     width: 100%;
@@ -173,6 +173,7 @@
 
   .profile__save-button {
     font-size: 12px;
+    margin-top: 356px;
   }
 
   .profile__exit-button {

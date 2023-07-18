@@ -18,7 +18,7 @@ function Register(props) {
   } 
 
   return (
-    <section className="register">
+    <section className="register" aria-label="Регистрация нового пользователя">
       <div className="register__content">
         <form className="register__form" name="register-form" onSubmit={handleSubmit}>
           <NavLink to="/"><img src={logo} className="register__logo" alt="лого сайта" /></NavLink>

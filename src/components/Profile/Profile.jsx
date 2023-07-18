@@ -25,7 +25,7 @@ function Profile(props) {
   }
 
   return (
-    <section className="profile" aria-label='Страница редактирования данных пользователя'>
+    <section className="profile" aria-label="Страница редактирования данных профиля пользователя">
       <form className="profile__content" onSubmit={handleSubmit}>
         <h2 className="profile__title">Привет Евгений!</h2>
         <ul className="profile__data">
@@ -33,7 +33,7 @@ function Profile(props) {
             <ul className="profile__item-content">
               <li className="profile__item-name">Имя</li>
               <li className="profile__item-data">
-                <input type="text" value={values.name ? values.name : ""} onChange={handleChange} className={`profile__input ${errors.name && "profile__input_type_error"}`} name="name" required minLength="2" maxLength="40" />
+                <input type="text" value={values.name ? values.name : ""} onChange={handleChange} className={`profile__input ${errors.name && "profile__input_type_error"}`} name="name" required minLength="2" maxLength="40" aria-label="Имя пользователя"/>
               </li>
             </ul>
           </li>
@@ -42,7 +42,7 @@ function Profile(props) {
             <ul className="profile__item-content">
               <li className="profile__item-name">E-mail</li>
               <li className="profile__item-data">
-                <input type="email" value={values.email ? values.email : ""} onChange={handleChange} className={`profile__input ${errors.email && "profile__input_type_error"}`} name="email" required minLength="2" maxLength="40" />
+                <input type="email" value={values.email ? values.email : ""} onChange={handleChange} className={`profile__input ${errors.email && "profile__input_type_error"}`} name="email" required minLength="2" maxLength="40" aria-label="Адрес электронной почты"/>
               </li>
             </ul>
           </li>

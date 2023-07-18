@@ -25,7 +25,7 @@
 }
 
 .login__title {
-  margin: 40px 0 0 0;
+  margin: 38px 0 0 0;
   color: #FFF;
   text-align: center;
   font-size: 24px;
@@ -36,7 +36,7 @@
 }
 
 .login__fieldset {
-  margin: 20px 0 0 0;
+  margin: 6px 0 0 0;
   display: inline-block;
   padding: 0;
   border: none;
@@ -44,7 +44,7 @@
 }
 
 .login__fieldset:first-of-type {
-  margin-top: 40px;
+  margin-top: 36px;
 }
 
 .login__fieldset-name {
@@ -95,7 +95,7 @@
 
 .login__submit-button {
   margin: 0;
-  margin: 69px 0 0 0;
+  margin: 169px 0 0 0;
   color: #FFF;
   text-align: center;
   font-size: 14px;
@@ -137,17 +137,38 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  text-decoration: none;
 }
 
 @media (max-width: 1000px) {
+  .login__content {
+    padding-top: 232px;
+  }
+
   .login__submit-button {
-    margin-top: 179px;  
+    margin-top: 168px;  
   }  
 }
 
 @media (max-width: 600px) {
+  .login__content {
+    padding-top: 56px;
+  }
+
+  .login__form {
+    align-items: center;
+  }
+  
+  .login__title {
+    margin-top: 47px;
+  }
+
+  .login__fieldset:first-of-type {
+    margin-top: 77px;
+  }
+
   .login__submit-button {
-    margin-top: 267px;  
+    margin-top: 256px;  
   }
 
     .login__submit-button, .login__span-text, .login__link {

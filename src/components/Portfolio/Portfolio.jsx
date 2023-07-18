@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 
 function Portfolio() {
   return (
-    <section className="portfolio" aria-label="Информация о студенте">
+    <section className="portfolio" aria-label="Моё портфолио">
       <div className="portfolio__content">
         <h4 className="portfolio__title">Портфолио</h4>
         <ul className="portfolio__items">
