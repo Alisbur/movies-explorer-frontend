@@ -78,7 +78,7 @@
   top: -40px;
 }
 
-@media (max-width:600px) {
+@media (max-width:500px) {
   .popup__form-container {
     width: 282px;
   }

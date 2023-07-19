@@ -13,12 +13,13 @@ function AboutMe() {
               <h3 className="aboutme__name">Евгений</h3>
               <p className="aboutme__brief">Начинающий фронтэнд-разработчик 39 лет</p>
               <p className="aboutme__biography">Родился и живу в Санкт-Петербурге. Есть семья, дети. 
+              Оканчивал ВУЗ по специальности связанной с IT, но поработать в этой области не довелось. 
               Фронтэнд-разработка и программирование интересны ещё с университета, и я хочу 
               актуализировать свои знания и развиваться в этом направлении.</p>
             </div>
-            <NavLink to="https://github.com/Alisbur" className="aboutme__link link-transparency" target="_blank">GitHub</NavLink>
+            <NavLink to="https://github.com/Alisbur" className="aboutme__link link-transparency" target="_blank">Github</NavLink>
           </div>
-          <img src={photo} className="aboutme__photo" alt="Фото студента" />
+          <img src={photo} className="aboutme__photo" alt="Моё фото на фоне рождественской ёлки" />
         </div>
       </div>
     </section>

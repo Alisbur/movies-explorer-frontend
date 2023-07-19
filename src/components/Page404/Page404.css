@@ -48,14 +48,14 @@
   max-width: 100px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .page404__content {
     max-width: 1280px;
     padding: 408px 30px 222px 30px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .page404__content {
     padding: 329px 30px 30px 30px;
   }

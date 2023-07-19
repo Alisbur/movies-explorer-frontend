@@ -68,8 +68,12 @@
   outline: none;
 }
 
+.search-form__fieldset:has(.search-form__input:focus) {
+  border: 1.5px solid #3DDC84;
+}
 
-@media (max-width: 1000px) {
+
+@media (max-width: 800px) {
   .search-form__content {
     padding: 57px 30px 10px 30px;
   }
@@ -89,7 +93,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .search-form__content {
     padding: 58px 10px 10px 10px;
   }

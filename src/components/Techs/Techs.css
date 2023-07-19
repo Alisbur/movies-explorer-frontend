@@ -44,7 +44,7 @@
 }
 
 .techs__text {
-  margin: 28px 0 100px 0;
+  margin: 24px 0 100px 0;
   max-width: 460px;
   color: #FFF;
   text-align: center;
@@ -90,7 +90,7 @@
 }  
 
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .techs__content {
     padding: 90px 50px;
   }
@@ -121,7 +121,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .techs__content {
     padding: 70px 18px;
   }

@@ -26,7 +26,7 @@
 }
 
 .profile__data {
-  margin: 112px 0 0 0;
+  margin: 106px 0 0 0;
   width: 410px;
   list-style: none;
   padding: 0;
@@ -36,20 +36,25 @@
 
 .profile__item {
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: baseline;
-  padding-top: 10px;
-  padding-bottom: 16px;
+  padding-top: 18px;
+  padding-bottom: 12px;
 }
 
 .profile__item:first-of-type {
   border-bottom: 1px solid rgba(66, 66, 66, 1);
 }
 
+.profile__item:has(.profile__input:focus) {
+  border-bottom: 2px solid #3DDC84;
+}
+
 .profile__item-content {
   width: 100%;
-  list-style: none;
+  margin: 0;
+  border: none;
   padding: 0;
   display: flex;
   flex-direction: row;
@@ -68,15 +73,9 @@
   line-height: normal;
 }
 
-.profile__item-data {
-  width: 100%;
-  margin: 0;
-}
-
 .profile__input {
   padding: 0;
   width: 100%;
-  min-width: 30ch;
   border: none;
   background-color: transparent;
   color: #FFF;
@@ -88,6 +87,10 @@
   line-height: normal;
 }
 
+.profile__input:focus {
+  outline: none;
+}
+
 .profile__input_type_error {
   color: #EE3465;
 }
@@ -95,7 +98,7 @@
 .profile__save-button {
   background-color: transparent;
   border: none;
-  margin: 197px 0 0 0;
+  margin: 202px 0 0 0;
   color: #FFF;
   text-align: center;
   font-size: 13px;
@@ -139,29 +142,29 @@
   display: flex;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .profile__content {
-    padding-top: 232px;
+    padding-top: 234px;
     padding-bottom: 269px;
   }  
 
   .profile__data {
-    margin-top: 86px;
+    margin-top: 78px;
   }  
 
   .profile__save-button {
-    margin-top: 186px
+    margin-top: 192px
   }  
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .profile__content {
-    padding-top: 68px;
+    padding-top: 67px;
     padding-bottom: 40px;
   }  
 
   .profile__data {
-    margin-top: 68px;
+    margin-top: 63px;
     max-width: 410px; 
     min-width: unset;
     width: 100%;
@@ -173,7 +176,7 @@
 
   .profile__save-button {
     font-size: 12px;
-    margin-top: 356px;
+    margin-top: 360px;
   }
 
   .profile__exit-button {

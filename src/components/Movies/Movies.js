@@ -5,11 +5,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies(props) {
   return (
-    <>
+    <main className="main">
       <SearchForm />
-      <MoviesCardList drawSaved={false}/>
+      <MoviesCardList drawSaved={false} films={props.listOfMovies}/>
       {props.loading && <Preloader />}
-    </>
+    </main>
   );
 }
 

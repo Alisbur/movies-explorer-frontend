@@ -5,7 +5,11 @@
   margin: 0 auto;
   line-height: 1;
   background-color: #202020;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: 'Suisse Intl', 'Inter', 'Arial', sans-serif;
+}
+
+.main {
+  width: 100%;
 }
 
 .link-transparency {

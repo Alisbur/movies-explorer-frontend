@@ -1,20 +1,21 @@
 .promo {
   margin: 0;
-  width: 100%;
+  width: 100%px;
   background-color: #073042;
 }
 
 .promo__content {
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 102px;
   max-width: 1280px;
-  padding: 50px 70px 60px 70px;
+  min-height: 560px;
+  padding: 50px 70px 0 70px;
   box-sizing: border-box;
-  overflow: hidden;
+  
+  background-image: url(../../images/OCO.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 722px 244px;
+  background-position: bottom 60px right 70px;
 }
 
 .promo__title {
@@ -30,35 +31,34 @@
   align-self: self-start;
 }
 
-.promo__pic {
-  min-width: 722px;
-  max-height: 244px;
-  align-self: self-end;
-}
-
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .promo__content {
-    padding: 300px 44px 70px 44px;
-    gap: 140px;
+    padding: 302px 44px 0 44px;
+    min-height: 845px;
+    background-size: 880px 230px;
+    background-position: bottom 70px center;
   }
 
   .promo__title {
     max-width: 680px;
     text-align: center;
-    align-self: center;
-  }
-
-  .promo__pic {
-    align-self: center;
-    min-width: 680px;
-    min-height: 230px;
   }
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 900px) {
   .promo__content {
-    padding: 183px 10px 40px 10px;
-    gap: 60px;
+    background-size: 880px 230px;
+    background-position-x: center;
+  }
+
+}
+
+@media (max-width: 500px) {
+  .promo__content {
+    padding: 182px 10px 0px 10px;
+    min-height: 628px;
+    background-position: center bottom 40px;
   }
 
   .promo__title {

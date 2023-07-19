@@ -8,16 +8,22 @@ function Portfolio() {
         <h4 className="portfolio__title">Портфолио</h4>
         <ul className="portfolio__items">
           <li className="portfolio__item">
-            <span className="portfolio__item-name">Статичный сайт</span>
-            <NavLink to="https://alisbur.github.io/mesto/" className="portfolio__link link-transparency" target="_blank" />
+            <NavLink to="https://alisbur.github.io/how-to-learn/" className="portfolio__link link-transparency" target="_blank">
+              <span className="portfolio__item-name">Статичный сайт</span>
+              <span className="portfolio__arrow" />
+            </NavLink>
           </li>
           <li className="portfolio__item">
-            <span className="portfolio__item-name">Адаптивный сайт</span>
-            <NavLink to="https://alisbur.github.io/russian-travel/" className="portfolio__link link-transparency" target="_blank" />
+            <NavLink to="https://alisbur.github.io/russian-travel/" className="portfolio__link link-transparency" target="_blank">
+              <span className="portfolio__item-name">Адаптивный сайт</span>
+              <span className="portfolio__arrow" />
+            </NavLink>
           </li>
           <li className="portfolio__item">
-            <span className="portfolio__item-name">Одностраничное приложение</span>
-            <NavLink to="https://alisbur.github.io/mesto/" className="portfolio__link link-transparency" target="_blank" />
+            <NavLink to="https://alisbur.github.io/mesto/" className="portfolio__link link-transparency" target="_blank">
+              <span className="portfolio__item-name">Одностраничное приложение</span>
+              <span className="portfolio__arrow" />
+            </NavLink>
           </li>                
         </ul>
       </div>

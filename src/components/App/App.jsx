@@ -15,6 +15,8 @@ import InfoToolTip from '../InfoToolTip/InfoTooltip';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
+import { films, savedFilms } from '../../utils/dev_const' //Временные данные
+
 /* Заготовка на будущее
 function handleRegisterSubmit() { };
 function handleLoginSubmit() { };
@@ -27,9 +29,18 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState({ name: 'Alisbur', email: 'test@test.test', _id: '12345' });
+  const [currentUser, setCurrentUser] = useState({ 
+    name: 'Alisbur', 
+    email: 'test@test.test', 
+    _id: '12345' 
+  });
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+  const [infoTooltip, setInfoTooltip] = useState({ 
+    isInfoTooltipOpened:false,
+    tooltipMessage:"",
+    toolTipState:false
+  });
+
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,7 +65,7 @@ function App() {
 
   //Обработчик закрытия попапов и бургера
   function closeAllPopups() {
-    setInfoTooltipOpen(false);
+    setInfoTooltip({ ...infoTooltip, isInfoTooltipOpened:false });
     setIsBurgerOpen(false);
   }
 
@@ -67,14 +78,18 @@ function App() {
 
   //Заглушка обработчика регистрации
   function handleRegister() {
-    setInfoTooltipOpen(true);
-    navigate("/", {replace:true});
+    setInfoTooltip({    
+      isInfoTooltipOpened: true,
+      tooltipMessage:"Вы успешно зарегистрировались!",
+      toolTipState: true
+    });
+    navigate("/signin", {replace:true});
   }
 
   //Заглушка обработчика логина
   function handleLogin() {
     setIsLoggedIn(true);
-    navigate("/", {replace:true});
+    navigate("/movies", {replace:true});
   }
 
   //Заглушка обработчика логаута
@@ -86,7 +101,12 @@ function App() {
   //Заглушка обработчика редактирования данных пользователя
   function handleUpdateUserData(name, email) {
     setCurrentUser({...currentUser, ['name']: name, ['email']: email})
-    navigate("/", {replace:true});
+    setInfoTooltip({    
+      isInfoTooltipOpened: true,
+      tooltipMessage:"Вы успешно изменили данные профиля!",
+      toolTipState: true
+    });
+    navigate("/movies", {replace:true});
   }
 
   return (
@@ -100,14 +120,18 @@ function App() {
           <Route path="/" element={<Main loggedIn={isLoggedIn} />} />
           <Route path="*" element={<Page404 prev="/" />} />
           <Route path="/profile" element={<ProtectedRouteElement element={Profile} updateUserData={handleUpdateUserData} logout={handleLogout} loggedIn={isLoggedIn} />} />
-          <Route path="/movies" element={<ProtectedRouteElement element={Movies} loggedIn={isLoggedIn} loading={isLoading} />} />
-          <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies} loggedIn={isLoggedIn} loading={isLoading} />} />
+          <Route path="/movies" element={<ProtectedRouteElement element={Movies} loggedIn={isLoggedIn} loading={isLoading} listOfMovies={films}/>} />
+          <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies} loggedIn={isLoggedIn} loading={isLoading} listOfMovies={savedFilms}/>} />
         </Routes>
       </CurrentUserContext.Provider>
       
       {((location.pathname==='/')||(location.pathname==='/movies')||(location.pathname==='/saved-movies')) && (<Footer />)}
       
-      <InfoToolTip isOpen={isInfoTooltipOpen} isOk={true} onClose={closeAllPopups} />
+      <InfoToolTip 
+        isOpen={infoTooltip.isInfoTooltipOpened} 
+        isOk={infoTooltip.toolTipState}
+        message={infoTooltip.tooltipMessage}
+        onClose={closeAllPopups} />
     </div>
   );
 }

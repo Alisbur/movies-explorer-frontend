@@ -25,34 +25,31 @@ function Profile(props) {
   }
 
   return (
-    <section className="profile" aria-label="Страница редактирования данных профиля пользователя">
-      <form className="profile__content" onSubmit={handleSubmit}>
-        <h2 className="profile__title">Привет Евгений!</h2>
-        <ul className="profile__data">
-          <li className="profile__item">
-            <ul className="profile__item-content">
-              <li className="profile__item-name">Имя</li>
-              <li className="profile__item-data">
-                <input type="text" value={values.name ? values.name : ""} onChange={handleChange} className={`profile__input ${errors.name && "profile__input_type_error"}`} name="name" required minLength="2" maxLength="40" aria-label="Имя пользователя"/>
-              </li>
-            </ul>
-          </li>
-          <li className={`profile__input-error ${!isValid ? "profile__input-error_visible" : "" }`}>{errors.name}</li>
-          <li className="profile__item">
-            <ul className="profile__item-content">
-              <li className="profile__item-name">E-mail</li>
-              <li className="profile__item-data">
-                <input type="email" value={values.email ? values.email : ""} onChange={handleChange} className={`profile__input ${errors.email && "profile__input_type_error"}`} name="email" required minLength="2" maxLength="40" aria-label="Адрес электронной почты"/>
-              </li>
-            </ul>
-          </li>
-          <li className={`profile__input-error ${!isValid ? "profile__input-error_visible" : "" }`}>{errors.email}</li>          
-        </ul>
-        <button type="submit" className={`profile__save-button ${isValid ? "link-transparency" : "profile__save-button_type_inactive"}`} disabled={!isValid} >Редактировать</button>
-        <button type="button" className="profile__exit-button link-transparency" onClick={handleLogout}>Выйти из аккаунта</button>
-      </form>
-    </section>
-
+    <main className="main">
+      <section className="profile" aria-label="Страница редактирования данных профиля пользователя">
+        <form className="profile__content" onSubmit={handleSubmit}>
+          <h1 className="profile__title">Привет Евгений!</h1>
+          <ul className="profile__data">
+            <li className="profile__item">
+              <fieldset className="profile__item-content">
+                <label className="profile__item-name">Имя</label>
+                <input type="text" value={values.name ? values.name : ""} onChange={handleChange} className={`profile__input ${errors.name && "profile__input_type_error"}`} name="name" placeholder="Имя" required minLength="2" maxLength="40" aria-label="Имя пользователя"/>
+              </fieldset>
+              <span className={`profile__input-error ${!isValid ? "profile__input-error_visible" : "" }`}>{errors.name}</span>
+            </li>
+            <li className="profile__item">
+              <fieldset className="profile__item-content">
+                <label className="profile__item-name">E-mail</label>
+                <input type="email" value={values.email ? values.email : ""} onChange={handleChange} className={`profile__input ${errors.email && "profile__input_type_error"}`} name="email" placeholder="Адрес электронной почты" required minLength="2" maxLength="40" aria-label="Адрес электронной почты"/>
+              </fieldset>
+              <span className={`profile__input-error ${!isValid ? "profile__input-error_visible" : "" }`}>{errors.email}</span>
+            </li>
+          </ul>
+          <button type="submit" className={`profile__save-button ${isValid ? "link-transparency" : "profile__save-button_type_inactive"}`} disabled={!isValid} >Редактировать</button>
+          <button type="button" className="profile__exit-button link-transparency" onClick={handleLogout}>Выйти из аккаунта</button>
+        </form>
+      </section>
+    </main>
   );
 }
 

@@ -70,14 +70,14 @@
   text-decoration: none;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .footer__content {
     padding-left: 30px;
     padding-right: 30px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .footer__content {
     padding: 62px 10px 20px 10px;
   }

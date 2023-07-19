@@ -91,13 +91,13 @@
   line-height: normal;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
   .movies-card__item-image {
-    height: 190px;
+    height: 191px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .movies-card__item-image {
     height: 168px;
   }

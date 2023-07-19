@@ -11,7 +11,7 @@ function Header(props) {
   const { width } = useWindowDimensions();
 
   React.useEffect(function () {
-    if (width>1000) {
+    if (width>800) {
       props.burgerClick(true);
     }
   }, [width]);
@@ -22,7 +22,6 @@ function Header(props) {
   }, [location]);
 
   function handleBurgerClick() {
-    console.log(props.isBurgerOpen);
     props.isBurgerOpen
       ? props.burgerClick(props.isBurgerOpen)
       : props.burgerClick(props.isBurgerOpen);
@@ -31,7 +30,7 @@ function Header(props) {
   return (
     <header className={`header ${location.pathname==="/" ? "header_background_promo" : ""}`}>
       <nav className="header__content">
-        <NavLink to="/"><img src={logo} className="header__logo" alt="Логотип Movie Explorer" /></NavLink>
+        <NavLink to="/" className="link-transparency"><img src={logo} className="header__logo" alt="Логотип Movie Explorer" /></NavLink>
         {!props.loggedIn
         ?
           (
@@ -44,7 +43,7 @@ function Header(props) {
               </li>                
             </ul>
           )
-        : width>1000
+        : width>800
           ? 
             (
               <div className="header__nav">

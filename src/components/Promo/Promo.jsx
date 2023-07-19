@@ -6,7 +6,7 @@ function Promo(props) {
     <section className="promo" aria-label="Заглавный слайд проектной работы">
       <div className="promo__content">
         <h1 className='promo__title'>Учебный проект студента факультета Веб-разработки.</h1>
-        <img src={pic} className='promo__pic' alt=""/>
+        <div className='promo__pic'></div>
       </div>
     </section>
   );

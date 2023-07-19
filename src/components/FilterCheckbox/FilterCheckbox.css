@@ -49,7 +49,7 @@
   left: 18px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .filter-checkbox__label {
     font-size: 11px;
   }

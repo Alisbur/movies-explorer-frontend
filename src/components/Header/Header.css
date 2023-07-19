@@ -76,7 +76,7 @@
   justify-content: flex-start;
   flex-direction: row;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .header__film-link-items_type_burger {
@@ -208,9 +208,9 @@
   top: 20px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .header__content {
-    padding: 18px 30px;
+    padding: 16px 30px;
   }
 
   .header__film-link_type_active {
@@ -239,7 +239,7 @@
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .header__content {
     padding: 18px 14px;
   }
@@ -273,9 +273,10 @@
   }
 
   .header__burger-button {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 36px;
     background-size: contain;
+    transform: translate(-2px, -1px);
   }
 }
 

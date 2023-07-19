@@ -214,4 +214,28 @@ const films = [
     saved: false
   }]
 
-  export default films;
+
+  const savedFilms = [
+    {
+      link:img3,
+      name:"какое-то кино",
+      time:88,
+      id: 1234567,
+      saved: true
+    },
+    {
+      link:img,
+      name:"какое-то кино",
+      time:22,
+      id: 1234567,
+      saved: true
+    },
+    {
+      link:img2,
+      name:"какое-то кино",
+      time:66,
+      id: 1234567,
+      saved: false
+    }]
+
+  export {films, savedFilms};

@@ -88,7 +88,7 @@
 }
 
 .aboutme__link {
-  margin: 0;
+  margin: 20px 0 0 0;
   color: #FFF;
   font-size: 14px;
   font-family: Inter;
@@ -104,9 +104,9 @@
   border-radius: 10px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .aboutme__content {
-    padding: 90px 50px 70px 50px;
+    padding: 89px 50px 70px 50px;
   }
 
   .aboutme__about {
@@ -146,13 +146,17 @@
   }
 
   .aboutme__photo {
-    margin: 0;
     max-height: 307px;
-    border-radius: 10px;
   }
 }
 
 @media (max-width: 600px) {
+  .aboutme__photo {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 500px) {
   .aboutme__content {
     padding: 70px 14px;
   }
@@ -173,10 +177,8 @@
   }
 
   .aboutme__photo {
-    margin: 0;
     width: 100%;
     max-height: none;
-    border-radius: 10px;
   }
 
   .aboutme__about {
