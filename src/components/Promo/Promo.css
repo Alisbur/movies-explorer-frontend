@@ -1,0 +1,70 @@
+.promo {
+  margin: 0;
+  width: 100%px;
+  background-color: #073042;
+}
+
+.promo__content {
+  margin: 0 auto;
+  max-width: 1280px;
+  min-height: 560px;
+  padding: 50px 70px 0 70px;
+  box-sizing: border-box;
+  
+  background-image: url(../../images/OCO.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 722px 244px;
+  background-position: bottom 60px right 70px;
+}
+
+.promo__title {
+  margin: 0;
+  max-width: 626px;
+  color: #FFF;
+  font-size: 40px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 52px;
+  letter-spacing: -1.6px;
+  align-self: self-start;
+}
+
+@media (max-width: 800px) {
+  .promo__content {
+    padding: 302px 44px 0 44px;
+    min-height: 845px;
+    background-size: 880px 230px;
+    background-position: bottom 70px center;
+  }
+
+  .promo__title {
+    max-width: 680px;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .promo__content {
+    background-size: 880px 230px;
+    background-position-x: center;
+  }
+
+}
+
+@media (max-width: 500px) {
+  .promo__content {
+    padding: 182px 10px 0px 10px;
+    min-height: 628px;
+    background-position: center bottom 40px;
+  }
+
+  .promo__title {
+    min-width: 300px;
+    font-size: 31px;
+    line-height: 39px;
+    letter-spacing: -1.24px;
+  }
+}
