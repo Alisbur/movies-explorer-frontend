@@ -15,7 +15,7 @@ function MoviesCardList(props) {
     else {setNumberOfFilmsToShow(5); setNumberOfFilmsToAdd(5);}
   },[]);
 
-  React.useEffect(function () {
+  useEffect(function () {
     if (width>800) {setNumberOfFilmsToAdd(16);}
     else if (width>500) {setNumberOfFilmsToAdd(8);}
     else {setNumberOfFilmsToAdd(5);}
@@ -27,12 +27,12 @@ function MoviesCardList(props) {
       <div className="movies-card-list__content">
         <div className="movies-card-list__items">
           {
-            props.films.slice(0, numberOfFilmsToShow).map((el, i) =>
-              <MoviesCard
-                key={i}
-                card={el}
-                drawSaved={props.drawSaved}
-              />)
+              props.films.slice(0, numberOfFilmsToShow).map((el, i) =>
+                <MoviesCard
+                  key={i}
+                  card={el}
+                  drawSaved={props.drawSaved}
+                />)
           }
         </div>
         <div className="movies-card-list__more">

@@ -194,7 +194,7 @@ const films = [
   },
   {
     link:img,
-    name:"какое-то кино",
+    name:"какое-то кино с названием в две строчки",
     time:77,
     id: 1234567,
     saved: false

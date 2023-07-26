@@ -40,9 +40,22 @@
 }
 
 .popup__logo {
+  margin: 0;
   display: block;
   width: 120px;
   height: 120px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: transparent;
+}
+
+.popup__logo_type_ok {
+  background-image: url(../../images/granted.svg);
+}
+
+.popup__logo_type_no {
+  background-image: url(../../images/denied.svg);
 }
 
 .popup__title {

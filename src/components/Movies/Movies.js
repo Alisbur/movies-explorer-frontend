@@ -7,8 +7,10 @@ function Movies(props) {
   return (
     <main className="main">
       <SearchForm />
-      <MoviesCardList drawSaved={false} films={props.listOfMovies}/>
-      {props.loading && <Preloader />}
+      {props.listOfMovies
+        ? <MoviesCardList drawSaved={false} films={props.listOfMovies}/>
+        : <Preloader />
+      }
     </main>
   );
 }

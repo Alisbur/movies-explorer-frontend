@@ -15,14 +15,10 @@ import InfoToolTip from '../InfoToolTip/InfoTooltip';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-import { films, savedFilms } from '../../utils/dev_const' //Временные данные
+import mainApi from '../../utils/MainApi.js';
+import moviesApi from '../../utils/MoviesApi';
 
-/* Заготовка на будущее
-function handleRegisterSubmit() { };
-function handleLoginSubmit() { };
-function handleCardSave() { };
-function handleCardDelete() { };
-*/
+import { films, savedFilms } from '../../utils/dev_const' //Временные данные
 
 function App() {
 
@@ -30,11 +26,16 @@ function App() {
   const navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useState({ 
-    name: 'Alisbur', 
-    email: 'test@test.test', 
-    _id: '12345' 
+    name: '', 
+    email: '', 
+    _id: '',
+    token: ''
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const [moviesData, setMoviesData] = useState(null);
+  const [savedMoviesData, setSavedMoviesData] = useState(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [infoTooltip, setInfoTooltip] = useState({ 
     isInfoTooltipOpened:false,
     tooltipMessage:"",
@@ -42,26 +43,36 @@ function App() {
   });
 
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-  const [cards, setCards] = useState([]);
+/*  const [cards, setCards] = useState([]); */
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState('');
+  
+  //Получаем с сервера список фильмов
+  React.useEffect(function () {
+    if (isLoggedIn) {
+      setIsLoading(true);
+      moviesApi.getInitialMovies()
+        .then((data) => {
+          setMoviesData(data);
+        })
+        .catch((err) => {
+          showInfoTooltip(`е удалось загрузить данные фильмов! Ошибка: ${err}`, false);
+        })
+        .finally(()=>{
+          setIsLoading(false);
+        });
+    }
+  }, [isLoggedIn]);
 
   //Определяем текущую страницу
   React.useEffect(() => {
     setPage(location.pathname);
   }, [location]);
 
-  //Добавляем лисенер нажатия на кнопки для закрытия попапов по Esc 
+  //Проверяем аутентифицирован ли пользователь
   React.useEffect(() => {
-    document.addEventListener("keydown", handleEscPress);
+    handleAuthCheck();
   }, [])
-
-  //Обработчик нажатия на кнопку Esc
-  function handleEscPress(e) {
-    if (e.key === 'Escape') {
-      closeAllPopups();
-    }
-  }
 
   //Обработчик закрытия попапов и бургера
   function closeAllPopups() {
@@ -76,13 +87,88 @@ function App() {
       : setIsBurgerOpen(true);
   }
 
-  //Заглушка обработчика регистрации
-  function handleRegister() {
+  //Открытие модалки с сообщением
+  function showInfoTooltip(message, isOk) {
     setInfoTooltip({    
       isInfoTooltipOpened: true,
-      tooltipMessage:"Вы успешно зарегистрировались!",
-      toolTipState: true
+      tooltipMessage: message,
+      toolTipState: isOk
     });
+  }
+
+  //Обработчик регистрации нового пользователя на сервере  
+  function handleRegisterSubmit( newUserData ) {
+    console.log(newUserData);
+    mainApi.register(newUserData)
+      .then((data) => {
+        showInfoTooltip(`Регистрация прошла успешно!`, true);
+        navigate("/signin", {replace:true});
+      })
+      .catch((err) => {
+        showInfoTooltip(`Не удалось зарегистрировать пользователя! Ошибка: ${err}`, false);
+      });
+  }  
+
+  //Обработчик авторизации пользователя на сервере
+  function handleLoginSubmit( userData ) {
+    mainApi.login(userData)
+      .then((data) => {
+        localStorage.setItem('token', data.token);
+        handleAuthCheck();
+      })
+      .catch((err) => {
+        showInfoTooltip(`Не удалось войти в систему! Ошибка: ${err}`, false);
+      })
+  }
+  
+ //Обработчик сохранения новых данных пользователя на сервере
+ function handleUpdateUserData(newUserData) {
+  mainApi.modifyProfileData(newUserData, currentUser.token)
+    .then(({ data }) => {
+      setCurrentUser({...currentUser, name: data.name, email: data.email });
+      showInfoTooltip(`Данные успешно изменены!`, true);
+    })
+    .catch((err) => {
+      showInfoTooltip(`Не удалось сохранить новые данные профиля! Ошибка: ${err}`, false);
+    });
+}
+
+  //Обработчик авторизации пользователя на сервере
+  function handleLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('moviesList');
+    setIsLoggedIn(false);
+    setCurrentUser({ name: '', email: '', _id: '', token: '' });
+/*    setMoviesData(null);*/
+    navigate("/signin", {replace:true});
+  }    
+
+  //Обработчик проверки выполненной авторизации
+  function handleAuthCheck() {
+    const jwt = localStorage.getItem('token');
+    const moviesList = localStorage.getItem('moviesList');
+    console.log(jwt);
+    if (jwt) {
+      mainApi.authCheck(jwt)
+        .then(({data}) => {
+          if((moviesList)&&(moviesData===null)) {
+            setMoviesData(moviesList);
+          }
+          setIsLoggedIn(true);
+          setCurrentUser({ name: data.name, email: data.email, _id: data._id, token: jwt});
+          navigate("/movies", {replace:true});
+        })
+        .catch((err) => {
+          showInfoTooltip(`Не удалось войти в систему! Ошибка: ${err}`, false);
+        });
+    }
+  }   
+
+
+/*
+  //Заглушка обработчика регистрации
+  function handleRegister() {
+    showInfoTooltip("Вы успешно зарегистрировались!", true)
     navigate("/signin", {replace:true});
   }
 
@@ -101,27 +187,25 @@ function App() {
   //Заглушка обработчика редактирования данных пользователя
   function handleUpdateUserData(name, email) {
     setCurrentUser({...currentUser, ['name']: name, ['email']: email})
-    setInfoTooltip({    
-      isInfoTooltipOpened: true,
-      tooltipMessage:"Вы успешно изменили данные профиля!",
-      toolTipState: true
-    });
+    showInfoTooltip("Вы успешно изменили данные профиля!", true)
     navigate("/movies", {replace:true});
   }
 
+  */
+
   return (
     <div className="app">
-      <CurrentUserContext.Provider value={currentUser}>
-      {((location.pathname==='/')||(location.pathname==='/movies')||(location.pathname==='/saved-movies')||(location.pathname==='/profile')) && (<Header loggedIn={isLoggedIn} isBurgerOpen={isBurgerOpen} burgerClick={handleBurgerClick}/>)}
-
+      <CurrentUserContext.Provider value={ currentUser }>
+        {((page==='/')||(page==='/movies')||(page==='/saved-movies')||(page==='/profile')) && 
+          (<Header loggedIn={ isLoggedIn } isBurgerOpen={ isBurgerOpen } burgerClick={ handleBurgerClick }/>)}
         <Routes>
-          <Route path="/signup" element={<Register submitBtnCap='Зарегистрироваться' register={handleRegister} title="Добро пожаловать!" />} />
-          <Route path="/signin" element={<Login submitBtnCap='Войти' login={handleLogin} title="Рады видеть!" />} />
-          <Route path="/" element={<Main loggedIn={isLoggedIn} />} />
-          <Route path="*" element={<Page404 prev="/" />} />
-          <Route path="/profile" element={<ProtectedRouteElement element={Profile} updateUserData={handleUpdateUserData} logout={handleLogout} loggedIn={isLoggedIn} />} />
-          <Route path="/movies" element={<ProtectedRouteElement element={Movies} loggedIn={isLoggedIn} loading={isLoading} listOfMovies={films}/>} />
-          <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies} loggedIn={isLoggedIn} loading={isLoading} listOfMovies={savedFilms}/>} />
+          <Route path="/signup" element={ <Register submitBtnCap='Зарегистрироваться' register={handleRegisterSubmit} title="Добро пожаловать!" /> } />
+          <Route path="/signin" element={ <Login submitBtnCap='Войти' login={handleLoginSubmit} title="Рады видеть!" /> } />
+          <Route path="/" element={ <Main loggedIn={isLoggedIn} />} />
+          <Route path="*" element={ <Page404 prev="/" />} />
+          <Route path="/profile" element={ <ProtectedRouteElement element={Profile} updateUserData={handleUpdateUserData} logout={handleLogout} loggedIn={isLoggedIn} /> } />
+          <Route path="/movies" element={ <ProtectedRouteElement element={Movies} loggedIn={isLoggedIn} loading={isLoading} listOfMovies={moviesData}/> } />
+          <Route path="/saved-movies" element={ <ProtectedRouteElement element={SavedMovies} loggedIn={isLoggedIn} loading={isLoading} listOfMovies={moviesData}/> } />
         </Routes>
       </CurrentUserContext.Provider>
       

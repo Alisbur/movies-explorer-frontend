@@ -9,12 +9,12 @@ function Register(props) {
   const {values, setValues, errors, setErrors, isValid, setIsValid, handleChange, resetForm} = useValidation();
 
   React.useEffect(()=>{
-      resetForm({email:'', password:''},{email:'', password:''}, false);
+      resetForm({name: '', email:'', password:''},{name:'', email:'', password:''}, false);
   },[,props.title]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.register(); 
+    props.register({ name:values.name, email:values.email, password:values.password }); 
   } 
 
   return (
