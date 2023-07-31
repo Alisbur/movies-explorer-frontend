@@ -44,6 +44,7 @@ function App() {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   //Текущая страница
   const [page, setPage] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   
   //Определяем текущую страницу
   React.useEffect(() => {
@@ -96,6 +97,7 @@ function App() {
       .then((data) => {
         localStorage.setItem('token', data.token);
         handleAuthCheck();
+        navigate("/movies", {replace:true});
       })
       .catch((err) => {
         showInfoTooltip(`Не удалось войти в систему! Ошибка: ${err}`, false);
@@ -132,11 +134,13 @@ function App() {
           setIsLoggedIn(true);
           setCurrentUser({ name: data.name, email: data.email, _id: data._id, token: jwt});
           getSavedMovies(jwt);
-          navigate("/movies", {replace:true});
+          setIsLoading(false);
         })
         .catch((err) => {
           showInfoTooltip(`Не удалось войти в систему! Ошибка: ${err}`, false);
         });
+    } else {
+      setIsLoading(false);
     }
   }   
 
@@ -177,6 +181,9 @@ function App() {
     return searchMovies(moviesArray, queryString);
   } */
 
+  if(isLoading) 
+    return (<></>)
+  
   return (
     <div className="app">
       <CurrentUserContext.Provider value={ currentUser }>
@@ -198,7 +205,6 @@ function App() {
             <ProtectedRouteElement 
               element={ Movies } 
               loggedIn={ isLoggedIn } 
-/*              handleSearch={ handleSearch }*/
               handleLikeClick={ handleLikeClick }
               savedMovies = { savedMovies } /> 
           } />
@@ -209,10 +215,6 @@ function App() {
               handleDeleteClick={ handleDeleteClick }
               savedMovies = { savedMovies } /> 
           } />
-          <Route path="*" element={
-            <ProtectedRouteElement 
-              element={ Page404 } /> 
-          } />          
           <Route path="*" element={ <Page404 />} />
         </Routes>
       </CurrentUserContext.Provider>
