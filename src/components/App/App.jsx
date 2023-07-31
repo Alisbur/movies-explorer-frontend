@@ -84,12 +84,14 @@ function App() {
     mainApi.register(newUserData)
       .then((data) => {
         showInfoTooltip(`Регистрация прошла успешно!`, true);
-        navigate("/signin", {replace:true});
+        handleLoginSubmit({ email:newUserData.email, password:newUserData.password });
       })
       .catch((err) => {
-        showInfoTooltip(`Не удалось зарегистрировать пользователя! Ошибка: ${err}`, false);
-      });
-  }  
+        err.then(({message}) => {
+          showInfoTooltip(`Не удалось зарегистрировать пользователя! Ошибка: ${message}`, false);
+        })
+      })
+    }
 
   //Обработчик авторизации пользователя на сервере
   function handleLoginSubmit( userData ) {
@@ -97,10 +99,11 @@ function App() {
       .then((data) => {
         localStorage.setItem('token', data.token);
         handleAuthCheck();
-        navigate("/movies", {replace:true});
       })
       .catch((err) => {
-        showInfoTooltip(`Не удалось войти в систему! Ошибка: ${err}`, false);
+        err.then(({message}) => {
+          showInfoTooltip(`Не удалось войти в систему! Ошибка: ${message}`, false);
+        })
       })
   }
   
@@ -109,11 +112,13 @@ function App() {
   mainApi.modifyProfileData(newUserData, currentUser.token)
     .then(({ data }) => {
       setCurrentUser({...currentUser, name: data.name, email: data.email });
-      showInfoTooltip(`Данные успешно изменены!`, true);
+      showInfoTooltip(`Данные профиля успешно изменены!`, true);
     })
     .catch((err) => {
-      showInfoTooltip(`Не удалось сохранить новые данные профиля! Ошибка: ${err}`, false);
-    });
+      err.then(({message}) => {
+        showInfoTooltip(`Не удалось сохранить новые данные профиля! Ошибка: ${message}`, false);
+      })
+    })
 }
 
   //Обработчик авторизации пользователя на сервере
@@ -121,24 +126,29 @@ function App() {
     localStorage.clear();
     setIsLoggedIn(false);
     setCurrentUser({ name: '', email: '', _id: '', token: '' });
-    navigate("/signin", {replace:true});
+    navigate("/", {replace:true});
   }    
 
   //Обработчик проверки выполненной авторизации
   function handleAuthCheck() {
     const jwt = localStorage.getItem('token');
     console.log(jwt);
+    console.log(isLoggedIn);
     if (jwt) {
       mainApi.authCheck(jwt)
         .then(({data}) => {
+          console.log(data);
           setIsLoggedIn(true);
           setCurrentUser({ name: data.name, email: data.email, _id: data._id, token: jwt});
           getSavedMovies(jwt);
           setIsLoading(false);
+          navigate("/movies", {replace:true});
         })
         .catch((err) => {
-          showInfoTooltip(`Не удалось войти в систему! Ошибка: ${err}`, false);
-        });
+          err.then(({message}) => {
+            showInfoTooltip(`Не удалось войти в систему! Ошибка: ${message}`, false);
+          })
+        })
     } else {
       setIsLoading(false);
     }
@@ -149,8 +159,10 @@ function App() {
     mainApi.getSavedMovies(jwt)
     .then(({data})=>setSavedMovies(data))
     .catch((err) => {
-      showInfoTooltip(`Не удалось загрузить сохранённые фильмы! Ошибка: ${err}`, false)
-    });
+      err.then(({message}) => {
+        showInfoTooltip(`Не удалось загрузить сохранённые фильмы! Ошибка: ${message}`, false);
+      })
+    })
   }
 
   function handleLikeClick(movie) {
@@ -158,13 +170,19 @@ function App() {
     ? mainApi.deleteSavedMovie(movie, currentUser.token)
       .then(({data}) => console.log(data))
       .catch((err) => {
-        showInfoTooltip(`Не удалось удалить фильм! Ошибка: ${err}`, false)})
+        err.then(({message}) => {
+          showInfoTooltip(`Не удалось удалить фильм! Ошибка: ${message}`, false);
+        })
+      })
       .finally(()=> getSavedMovies(currentUser.token))
 
     : mainApi.addSavedMovie(movie, currentUser.token)
       .then(({data}) => console.log(data))
       .catch((err) => {
-        showInfoTooltip(`Не удалось сохранить фильм! Ошибка: ${err}`, false)})
+        err.then(({message}) => {
+          showInfoTooltip(`Не удалось сохранить фильм! Ошибка: ${message}`, false);
+        })
+      })
       .finally(()=> getSavedMovies(currentUser.token))
   }
 
@@ -172,14 +190,12 @@ function App() {
     mainApi.deleteSavedMovie(movie, currentUser.token)
       .then(({data}) => console.log(data))
       .catch((err) => {
-        showInfoTooltip(`Не удалось удалить фильм! Ошибка: ${err}`, false)})
+        err.then(({message}) => {
+          showInfoTooltip(`Не удалось удалить фильм! Ошибка: ${message}`, false);
+        })
+      })
       .finally(()=> getSavedMovies(currentUser.token))
   }
-
-/*
-  function handleSearch(moviesArray, queryString) {
-    return searchMovies(moviesArray, queryString);
-  } */
 
   if(isLoading) 
     return (<></>)
