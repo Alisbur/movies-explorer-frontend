@@ -70,7 +70,7 @@ function Header(props) {
                     <NavLink to="/saved-movies" className={`header__film-link ${location.pathname==="/saved-movies" ? "header__film-link_type_active" : "link-transparency"}`}>Сохранённые фильмы</NavLink>
                   </li>
                 </ul>
-                <button type="button" className="header__account-button button-transparency" onClick={()=>{navigate("/profile", {replace:true})}}>Аккаунт</button>
+                <button type="button" className="header__account-button button-transparency" onClick={()=>{/*location.pathname==="/profile" ? navigate(-1) : */navigate("/profile", {replace:true})}}>Аккаунт</button>
               </div>
             )
           : 
@@ -92,7 +92,7 @@ function Header(props) {
                             <NavLink to="/saved-movies" className={`header__film-link ${location.pathname==="/saved-movies" ? "header__film-link_type_active" : "link-transparency"}`}>Сохранённые фильмы</NavLink>
                           </li>
                         </ul>
-                        <button type="button" className="header__account-button button-transparency" onClick={()=>{navigate("/profile", {replace:true})}}>Аккаунт</button>
+                        <button type="button" className="header__account-button button-transparency" onClick={()=>{/*location.pathname==="/profile" ? navigate(-1) : */navigate("/profile", {replace:true})}}>Аккаунт</button>
                       </div>
                     </div>
                   </div>

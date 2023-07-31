@@ -1,6 +1,7 @@
 //Данные для api связи с сервером Beatfilm
 export const beatfilmMoviesApiConfig = {
   server: 'https://api.nomoreparties.co/beatfilm-movies',
+  baseUrl: 'https://api.nomoreparties.co/',
 };
 
 //Данные для api связи с сервером moviesExplorer

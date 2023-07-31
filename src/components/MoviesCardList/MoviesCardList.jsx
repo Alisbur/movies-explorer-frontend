@@ -10,17 +10,18 @@ function MoviesCardList(props) {
   const { width } = useWindowDimensions();
 
   useEffect(()=>{
-    if (width>800) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(16);}
-    else if (width>500) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(8);}
-    else {setNumberOfFilmsToShow(5); setNumberOfFilmsToAdd(5);}
+    if (width>1270) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
+    else if (width>800) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
+    else if (width>500) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(4);}
+    else {setNumberOfFilmsToShow(5); setNumberOfFilmsToAdd(2);}
   },[]);
 
   useEffect(function () {
-    if (width>800) {setNumberOfFilmsToAdd(16);}
-    else if (width>500) {setNumberOfFilmsToAdd(8);}
-    else {setNumberOfFilmsToAdd(5);}
+    if (width>1270) {setNumberOfFilmsToAdd(8);}
+    else if (width>800) {setNumberOfFilmsToAdd(6);}
+    else if (width>500) {setNumberOfFilmsToAdd(4);}
+    else {setNumberOfFilmsToAdd(2);}
   }, [width]);
-
 
   return (
     <section className="movies-card-list" aria-label="Галерея фотографий">
@@ -29,9 +30,11 @@ function MoviesCardList(props) {
           {
               props.films.slice(0, numberOfFilmsToShow).map((el, i) =>
                 <MoviesCard
-                  key={i}
-                  card={el}
-                  drawSaved={props.drawSaved}
+                  key = { i }
+                  movie = { el }
+                  handleLikeClick = { props.handleLikeClick }
+                  handleDeleteClick = { props.handleDeleteClick }
+                  drawSaved = { props.drawSaved }
                 />)
           }
         </div>

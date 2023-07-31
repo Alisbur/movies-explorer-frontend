@@ -111,6 +111,7 @@ class MainApi {
   //Метод формирования запроса для удаления карточки
   deleteSavedMovie({ movieId }, token) {
     const path = this._server + this._moviesDataPath + `/${movieId}`;
+    console.log(path);
     const message = { 
       method: 'DELETE',
       headers: {

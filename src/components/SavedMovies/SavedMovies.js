@@ -7,7 +7,7 @@ function SavedMovies(props) {
   return (
     <main className="main">
       <SearchForm />
-      <MoviesCardList drawSaved={true} films={props.listOfMovies}/>
+      <MoviesCardList drawSaved={true} films={props.savedMovies} handleDeleteClick={props.handleDeleteClick}/>
       {props.loading && <Preloader />}
     </main>
   );

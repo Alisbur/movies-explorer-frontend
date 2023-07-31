@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import './App.css';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
+import { movieDataFormatConverter, searchMovies, SHORT } from "../../utils/fncLib";
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -16,9 +17,6 @@ import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import mainApi from '../../utils/MainApi.js';
-import moviesApi from '../../utils/MoviesApi';
-
-import { films, savedFilms } from '../../utils/dev_const' //Временные данные
 
 function App() {
 
@@ -32,38 +30,21 @@ function App() {
     token: ''
   });
 
-  const [moviesData, setMoviesData] = useState(null);
-  const [savedMoviesData, setSavedMoviesData] = useState(null);
-
+  //Массив сохранённых фильмов
+  const [savedMovies, setSavedMovies] = useState([]);
+  //Залогинен ли пользователь
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //Данные информационного попапа
   const [infoTooltip, setInfoTooltip] = useState({ 
     isInfoTooltipOpened:false,
     tooltipMessage:"",
     toolTipState:false
   });
-
+  //Состояние бургера
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-/*  const [cards, setCards] = useState([]); */
-  const [isLoading, setIsLoading] = useState(false);
+  //Текущая страница
   const [page, setPage] = useState('');
   
-  //Получаем с сервера список фильмов
-  React.useEffect(function () {
-    if (isLoggedIn) {
-      setIsLoading(true);
-      moviesApi.getInitialMovies()
-        .then((data) => {
-          setMoviesData(data);
-        })
-        .catch((err) => {
-          showInfoTooltip(`е удалось загрузить данные фильмов! Ошибка: ${err}`, false);
-        })
-        .finally(()=>{
-          setIsLoading(false);
-        });
-    }
-  }, [isLoggedIn]);
-
   //Определяем текущую страницу
   React.useEffect(() => {
     setPage(location.pathname);
@@ -135,27 +116,22 @@ function App() {
 
   //Обработчик авторизации пользователя на сервере
   function handleLogout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('moviesList');
+    localStorage.clear();
     setIsLoggedIn(false);
     setCurrentUser({ name: '', email: '', _id: '', token: '' });
-/*    setMoviesData(null);*/
     navigate("/signin", {replace:true});
   }    
 
   //Обработчик проверки выполненной авторизации
   function handleAuthCheck() {
     const jwt = localStorage.getItem('token');
-    const moviesList = localStorage.getItem('moviesList');
     console.log(jwt);
     if (jwt) {
       mainApi.authCheck(jwt)
         .then(({data}) => {
-          if((moviesList)&&(moviesData===null)) {
-            setMoviesData(moviesList);
-          }
           setIsLoggedIn(true);
           setCurrentUser({ name: data.name, email: data.email, _id: data._id, token: jwt});
+          getSavedMovies(jwt);
           navigate("/movies", {replace:true});
         })
         .catch((err) => {
@@ -164,52 +140,85 @@ function App() {
     }
   }   
 
+  //Получение списка сохранённых фильмов
+  function getSavedMovies(jwt) {
+    mainApi.getSavedMovies(jwt)
+    .then(({data})=>setSavedMovies(data))
+    .catch((err) => {
+      showInfoTooltip(`Не удалось загрузить сохранённые фильмы! Ошибка: ${err}`, false)
+    });
+  }
+
+  function handleLikeClick(movie) {
+    movie.saved
+    ? mainApi.deleteSavedMovie(movie, currentUser.token)
+      .then(({data}) => console.log(data))
+      .catch((err) => {
+        showInfoTooltip(`Не удалось удалить фильм! Ошибка: ${err}`, false)})
+      .finally(()=> getSavedMovies(currentUser.token))
+
+    : mainApi.addSavedMovie(movie, currentUser.token)
+      .then(({data}) => console.log(data))
+      .catch((err) => {
+        showInfoTooltip(`Не удалось сохранить фильм! Ошибка: ${err}`, false)})
+      .finally(()=> getSavedMovies(currentUser.token))
+  }
+
+  function handleDeleteClick(movie) {
+    mainApi.deleteSavedMovie(movie, currentUser.token)
+      .then(({data}) => console.log(data))
+      .catch((err) => {
+        showInfoTooltip(`Не удалось удалить фильм! Ошибка: ${err}`, false)})
+      .finally(()=> getSavedMovies(currentUser.token))
+  }
 
 /*
-  //Заглушка обработчика регистрации
-  function handleRegister() {
-    showInfoTooltip("Вы успешно зарегистрировались!", true)
-    navigate("/signin", {replace:true});
-  }
-
-  //Заглушка обработчика логина
-  function handleLogin() {
-    setIsLoggedIn(true);
-    navigate("/movies", {replace:true});
-  }
-
-  //Заглушка обработчика логаута
-  function handleLogout() {
-    setIsLoggedIn(false);
-    navigate("/", {replace:true});
-  }
-
-  //Заглушка обработчика редактирования данных пользователя
-  function handleUpdateUserData(name, email) {
-    setCurrentUser({...currentUser, ['name']: name, ['email']: email})
-    showInfoTooltip("Вы успешно изменили данные профиля!", true)
-    navigate("/movies", {replace:true});
-  }
-
-  */
+  function handleSearch(moviesArray, queryString) {
+    return searchMovies(moviesArray, queryString);
+  } */
 
   return (
     <div className="app">
       <CurrentUserContext.Provider value={ currentUser }>
         {((page==='/')||(page==='/movies')||(page==='/saved-movies')||(page==='/profile')) && 
           (<Header loggedIn={ isLoggedIn } isBurgerOpen={ isBurgerOpen } burgerClick={ handleBurgerClick }/>)}
+        
         <Routes>
           <Route path="/signup" element={ <Register submitBtnCap='Зарегистрироваться' register={handleRegisterSubmit} title="Добро пожаловать!" /> } />
           <Route path="/signin" element={ <Login submitBtnCap='Войти' login={handleLoginSubmit} title="Рады видеть!" /> } />
           <Route path="/" element={ <Main loggedIn={isLoggedIn} />} />
-          <Route path="*" element={ <Page404 prev="/" />} />
-          <Route path="/profile" element={ <ProtectedRouteElement element={Profile} updateUserData={handleUpdateUserData} logout={handleLogout} loggedIn={isLoggedIn} /> } />
-          <Route path="/movies" element={ <ProtectedRouteElement element={Movies} loggedIn={isLoggedIn} loading={isLoading} listOfMovies={moviesData}/> } />
-          <Route path="/saved-movies" element={ <ProtectedRouteElement element={SavedMovies} loggedIn={isLoggedIn} loading={isLoading} listOfMovies={moviesData}/> } />
+          <Route path="/profile" element={ 
+            <ProtectedRouteElement 
+              element={ Profile } 
+              updateUserData={handleUpdateUserData} 
+              logout={handleLogout} 
+              loggedIn={isLoggedIn} /> 
+            } />
+          <Route path="/movies" element={ 
+            <ProtectedRouteElement 
+              element={ Movies } 
+              loggedIn={ isLoggedIn } 
+/*              handleSearch={ handleSearch }*/
+              handleLikeClick={ handleLikeClick }
+              savedMovies = { savedMovies } /> 
+          } />
+          <Route path="/saved-movies" element={
+            <ProtectedRouteElement 
+              element={ SavedMovies } 
+              loggedIn={ isLoggedIn } 
+              handleDeleteClick={ handleDeleteClick }
+              savedMovies = { savedMovies } /> 
+          } />
+          <Route path="*" element={
+            <ProtectedRouteElement 
+              element={ Page404 } /> 
+          } />          
+          <Route path="*" element={ <Page404 />} />
         </Routes>
       </CurrentUserContext.Provider>
       
-      {((location.pathname==='/')||(location.pathname==='/movies')||(location.pathname==='/saved-movies')) && (<Footer />)}
+      {((location.pathname==='/')||(location.pathname==='/movies')||(location.pathname==='/saved-movies')) && 
+        (<Footer />)}
       
       <InfoToolTip 
         isOpen={infoTooltip.isInfoTooltipOpened} 
