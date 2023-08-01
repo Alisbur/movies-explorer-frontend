@@ -26,6 +26,7 @@ function SavedMovies(props) {
 
   //При изменении одной из зависимостей происходит обновление результатов поиска
   React.useEffect (()=>{
+    console.log(searchQuerry);
     const result = searchMovies(props.savedMovies, searchQuerry);
     setSearchResult(
       filterCheckboxState
@@ -36,8 +37,12 @@ function SavedMovies(props) {
 
 //Обработчик поиска в форме
   function handleSearchClick(queryString) {
-    setIsLoading(true);
-    setSearchQuerry(queryString);
+    if(queryString){
+      setIsLoading(true);
+      setSearchQuerry(queryString);
+    } else {
+      props.showInfoTooltip('Нужно ввести ключевое слово', false) ;
+    }
   }
 
   return (
@@ -47,6 +52,7 @@ function SavedMovies(props) {
         checkboxState={ filterCheckboxState }
         handleCheckboxSwitch={ handleFilterCheckboxSwitch }
         queryVal={ searchQuerry }
+        drawSaved={ true }
       />
       <div className="savedmovies">
         {isLoading

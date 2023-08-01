@@ -46,7 +46,8 @@ function Movies(props) {
   //Идёт ли загрузка
   const [isLoading, setIsLoading] = React.useState(false);
   //Стейт для активации эффекта с поиском
-  const [isSearching, setIsSearching] = React.useState(false);  
+  const [isSearching, setIsSearching] = React.useState(false);
+  const [isQueryStringEmpty, setIsQueryStringEmpty] = React.useState(true);
 
 //При изменении параметров последнего поиска после получения результата поиска они сохраняются в localstorage
   React.useEffect (()=>{
@@ -107,8 +108,13 @@ function Movies(props) {
   }, [isSearching])
 
   function handleSearchClick(queryString) {
-    setSearchQuerry(queryString);
-    setIsSearching(true);
+    if(queryString) {
+      setIsQueryStringEmpty(false);
+      setIsSearching(true);
+      setSearchQuerry(queryString);
+    } else {
+      props.showInfoTooltip('Нужно ввести ключевое слово', false) ;
+    }
   }
 
   return (

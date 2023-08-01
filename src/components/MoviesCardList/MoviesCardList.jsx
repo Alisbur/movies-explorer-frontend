@@ -10,17 +10,17 @@ function MoviesCardList(props) {
   const { width } = useWindowDimensions();
 
   useEffect(()=>{
-    if (width>1270) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
-    else if (width>800) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
-    else if (width>500) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(4);}
+    if (width>1279) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
+    else if (width>1010) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
+    else if (width>650) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(4);}
     else {setNumberOfFilmsToShow(5); setNumberOfFilmsToAdd(2);}
   },[]);
 
   useEffect(function () {
-    if (width>1270) {setNumberOfFilmsToAdd(8);}
-    else if (width>800) {setNumberOfFilmsToAdd(6);}
-    else if (width>500) {setNumberOfFilmsToAdd(4);}
-    else {setNumberOfFilmsToAdd(2);}
+    if (width>1279) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
+    else if (width>1010) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
+    else if (width>650) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(4);}
+    else {setNumberOfFilmsToShow(5); setNumberOfFilmsToAdd(2);}
   }, [width]);
 
   return (
@@ -30,7 +30,7 @@ function MoviesCardList(props) {
           {
               props.films.slice(0, props.drawSaved ? props.films.length : numberOfFilmsToShow).map((el, i) =>
                 <MoviesCard
-                  key = { el._id }
+                  key = { i }
                   movie = { el }
                   handleLikeClick = { props.handleLikeClick }
                   handleDeleteClick = { props.handleDeleteClick }
@@ -38,13 +38,17 @@ function MoviesCardList(props) {
                 />)
           }
         </div>
-        { 
-          props.drawSaved && <div className="movies-card-list__more">
-            {
-              props.films.length>numberOfFilmsToShow && <button type="button" onClick={()=>setNumberOfFilmsToShow(numberOfFilmsToShow+numberOfFilmsToAdd)} className="movies-card-list__more-button button-transparency" aria-label="Загрузить больше фильмов">Ещё</button>
-            }
-          </div> 
-        }
+        {!props.drawSaved && <div className="movies-card-list__more">
+          {
+            props.films.length>numberOfFilmsToShow && <button 
+              type="button" 
+              onClick={()=>setNumberOfFilmsToShow(numberOfFilmsToShow+numberOfFilmsToAdd)} 
+              className="movies-card-list__more-button button-transparency" 
+              aria-label="Загрузить больше фильмов">
+            Ещё
+            </button>
+          }
+        </div>}
       </div>
     </section>
   );

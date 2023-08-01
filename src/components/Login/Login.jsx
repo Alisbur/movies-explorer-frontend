@@ -26,7 +26,7 @@ function Login(props) {
             <h1 className="login__title">{props.title}</h1>
             <fieldset className="login__fieldset">
               <label className="login__fieldset-name">E-mail</label>
-              <input type="email" onChange={handleChange} className={`login__input ${errors.email && "login__input_type_error"}`} placeholder="Адрес электронной почты" name="email" required minLength="2" maxLength="40" />
+              <input type="email" onChange={handleChange} className={`login__input ${errors.email && "login__input_type_error"}`} placeholder="Адрес электронной почты" name="email" required minLength="2" maxLength="40" autoComplete="new-password" />
               <span className={`login__input-error ${!isValid ? "login__input-error_visible" : "" }`}>{errors.email}</span>
             </fieldset>
             <fieldset className="login__fieldset">

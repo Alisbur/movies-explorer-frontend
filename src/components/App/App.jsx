@@ -217,21 +217,24 @@ function App() {
               element={ Profile } 
               updateUserData={handleUpdateUserData} 
               logout={handleLogout} 
-              loggedIn={isLoggedIn} /> 
+              loggedIn={isLoggedIn}
+              showInfoTooltip={showInfoTooltip} /> 
             } />
           <Route path="/movies" element={ 
             <ProtectedRouteElement 
               element={ Movies } 
               loggedIn={ isLoggedIn } 
               handleLikeClick={ handleLikeClick }
-              savedMovies = { savedMovies } /> 
+              savedMovies = { savedMovies }
+              showInfoTooltip={showInfoTooltip} /> 
           } />
           <Route path="/saved-movies" element={
             <ProtectedRouteElement 
               element={ SavedMovies } 
               loggedIn={ isLoggedIn } 
               handleDeleteClick={ handleDeleteClick }
-              savedMovies = { savedMovies } /> 
+              savedMovies = { savedMovies }
+              showInfoTooltip={showInfoTooltip} />
           } />
           <Route path="*" element={ <Page404 />} />
         </Routes>

@@ -23,7 +23,7 @@ function SearchForm(props) {
       <div className="search-form__content">
         <form className="search-form__form" name="search-form-form" onSubmit={ handleSearch } >
           <fieldset className="search-form__fieldset">
-            <input type="text" value={values.query ? values.query : "" } onChange={ handleChange } className="search-form__input" placeholder="Фильм" name="query" required/>
+            <input type="text" value={values.query ? values.query : "" } onChange={ handleChange } className="search-form__input" placeholder="Фильм" name="query" />
             <button type="submit" className="search-form__button button-transparency" name="search-form-button" />
           </fieldset>
           <FilterCheckbox 
