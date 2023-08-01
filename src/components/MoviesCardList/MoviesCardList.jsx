@@ -28,9 +28,9 @@ function MoviesCardList(props) {
       <div className="movies-card-list__content">
         <div className="movies-card-list__items">
           {
-              props.films.slice(0, numberOfFilmsToShow).map((el, i) =>
+              props.films.slice(0, props.drawSaved ? props.films.length : numberOfFilmsToShow).map((el, i) =>
                 <MoviesCard
-                  key = { i }
+                  key = { el._id }
                   movie = { el }
                   handleLikeClick = { props.handleLikeClick }
                   handleDeleteClick = { props.handleDeleteClick }
@@ -38,9 +38,13 @@ function MoviesCardList(props) {
                 />)
           }
         </div>
-        <div className="movies-card-list__more">
-          {props.films.length>numberOfFilmsToShow && <button type="button" onClick={()=>setNumberOfFilmsToShow(numberOfFilmsToShow+numberOfFilmsToAdd)} className="movies-card-list__more-button button-transparency" aria-label="Загрузить больше фильмов">Ещё</button>}
-        </div>
+        { 
+          props.drawSaved && <div className="movies-card-list__more">
+            {
+              props.films.length>numberOfFilmsToShow && <button type="button" onClick={()=>setNumberOfFilmsToShow(numberOfFilmsToShow+numberOfFilmsToAdd)} className="movies-card-list__more-button button-transparency" aria-label="Загрузить больше фильмов">Ещё</button>
+            }
+          </div> 
+        }
       </div>
     </section>
   );

@@ -106,7 +106,34 @@ function App() {
         })
       })
   }
-  
+
+  //Обработчик проверки выполненной авторизации
+  function handleAuthCheck() {
+    const jwt = localStorage.getItem('token');
+    console.log(jwt);
+    console.log(isLoggedIn);
+    if (jwt) {
+      mainApi.authCheck(jwt)
+        .then(({data}) => {
+          console.log(data);
+          setIsLoggedIn(true);
+          setCurrentUser({ name: data.name, email: data.email, _id: data._id, token: jwt});
+          getSavedMovies(jwt);
+          setIsLoading(false);
+          if((location.pathname === '/signin')||(location.pathname==='/signup')) {
+            navigate("/movies", {replace:true});
+          }
+        })
+        .catch((err) => {
+          err.then(({message}) => {
+            showInfoTooltip(`Не удалось войти в систему! Ошибка: ${message}`, false);
+          })
+        })
+    } else {
+      setIsLoading(false);
+    }
+  }     
+
  //Обработчик сохранения новых данных пользователя на сервере
  function handleUpdateUserData(newUserData) {
   mainApi.modifyProfileData(newUserData, currentUser.token)
@@ -128,31 +155,6 @@ function App() {
     setCurrentUser({ name: '', email: '', _id: '', token: '' });
     navigate("/", {replace:true});
   }    
-
-  //Обработчик проверки выполненной авторизации
-  function handleAuthCheck() {
-    const jwt = localStorage.getItem('token');
-    console.log(jwt);
-    console.log(isLoggedIn);
-    if (jwt) {
-      mainApi.authCheck(jwt)
-        .then(({data}) => {
-          console.log(data);
-          setIsLoggedIn(true);
-          setCurrentUser({ name: data.name, email: data.email, _id: data._id, token: jwt});
-          getSavedMovies(jwt);
-          setIsLoading(false);
-          navigate("/movies", {replace:true});
-        })
-        .catch((err) => {
-          err.then(({message}) => {
-            showInfoTooltip(`Не удалось войти в систему! Ошибка: ${message}`, false);
-          })
-        })
-    } else {
-      setIsLoading(false);
-    }
-  }   
 
   //Получение списка сохранённых фильмов
   function getSavedMovies(jwt) {
