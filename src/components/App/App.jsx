@@ -236,7 +236,7 @@ function App() {
 
           <Route path="/" element={ 
             <Main 
-              loggedIn={isLoggedIn} />
+              loggedIn={ isLoggedIn } />
             } />
 
           <Route path="/profile" element={ 

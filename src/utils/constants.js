@@ -10,7 +10,7 @@ export const beatfilmMoviesApiConfig = {
 //Данные для api связи с сервером moviesExplorer
 export const moviesExplorerApiConfig = {
 /*  server: 'https://api.alisbur-diploma.nomoreparties.sbs',*/
-  server: 'http://localhost:3001',
+  server: 'https://api.alisbur-diploma.nomoreparties.sbs',
   registerPath : '/signup',
   loginPath : '/signin',
   authCheckPath : '/users/me',
