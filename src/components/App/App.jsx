@@ -92,6 +92,7 @@ function App() {
       .catch((err) => {
         err.then(({message}) => {
           showInfoTooltip(`Не удалось зарегистрировать пользователя! Ошибка: ${message}`, false);
+          setIsFetching(false);
         })
       })
     }
@@ -107,6 +108,7 @@ function App() {
       .catch((err) => {
         err.then(({message}) => {
           showInfoTooltip(`Не удалось войти в систему! Ошибка: ${message}`, false);
+          setIsFetching(false);
         })
       })
   }
@@ -129,6 +131,7 @@ function App() {
         .catch((err) => {
           err.then(({message}) => {
             showInfoTooltip(`Не удалось войти в систему! Ошибка: ${message}`, false);
+            setIsFetching(false);
           })
         })
     } else {
