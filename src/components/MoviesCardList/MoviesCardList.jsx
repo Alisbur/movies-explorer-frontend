@@ -1,20 +1,20 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import useWindowDimensions from "../../hooks/useWindowDimensions.js"
 
 function MoviesCardList(props) {
   //Стейт сколько фильмов отображать
-  const [numberOfFilmsToShow, setNumberOfFilmsToShow] = useState(16);
+  const [numberOfFilmsToShow, setNumberOfFilmsToShow] = React.useState(16);
   
   //Стейт сколько фильмов добавлять
-  const [numberOfFilmsToAdd, setNumberOfFilmsToAdd] = useState(0);
+  const [numberOfFilmsToAdd, setNumberOfFilmsToAdd] = React.useState(0);
   
   //Ширина окна, определяемая хуком
   const { width } = useWindowDimensions();
 
   //Устанавливаем начальные значения параметров вывода карточек
-  useEffect(()=>{
+  React.useEffect(()=>{
     if (width>1279) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
     else if (width>1010) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
     else if (width>650) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(4);}
@@ -22,7 +22,7 @@ function MoviesCardList(props) {
   },[]);
 
   //Устанавливаем значения параметров вывода карточек при изменении ширины окна
-  useEffect(function () {
+  React.useEffect(function () {
     if (width>1279) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
     else if (width>1010) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
     else if (width>650) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(4);}
@@ -34,9 +34,9 @@ function MoviesCardList(props) {
       <div className="movies-card-list__content">
         <div className="movies-card-list__items">
           {
-              props.films.slice(0, props.drawSaved ? props.films.length : numberOfFilmsToShow).map((el, i) =>
+              props.films.slice(0, props.drawSaved ? props.films.length : numberOfFilmsToShow).map((el) =>
                 <MoviesCard
-                  key = { i }
+                  key = { el.movieId }
                   movie = { el }
                   handleLikeClick = { props.handleLikeClick }
                   handleDeleteClick = { props.handleDeleteClick }

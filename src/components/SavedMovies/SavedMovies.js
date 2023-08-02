@@ -3,7 +3,8 @@ import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { searchMovies, SHORT } from "../../utils/fncLib";
+import { searchMovies, checkQuery } from "../../utils/fncLib";
+import { SHORT } from "../../utils/constants";
 
 function SavedMovies(props) {
 
@@ -36,7 +37,7 @@ function SavedMovies(props) {
 
 //Обработчик поиска в форме
   function handleSearchClick(queryString) {
-    if(queryString){
+    if(checkQuery(queryString)){
       setIsLoading(true);
       setSearchQuerry(queryString);
     } else {

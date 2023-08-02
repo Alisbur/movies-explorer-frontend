@@ -2,8 +2,6 @@ import { beatfilmMoviesApiConfig } from './constants.js';
 
 const { baseUrl } = beatfilmMoviesApiConfig;
 
-export const SHORT = 40;
-
 export function movieDataFormatConverter(data) {
   return {
     country : data.country,
@@ -21,10 +19,19 @@ export function movieDataFormatConverter(data) {
   }
 }
 
+export function checkQuery(str) {
+  if(str.trim().length) return true;
+  return false;
+}
+
 //поиск в названиях фильмов по строке
 export function searchMovies(moviesArray, str) {
-  const regex = new RegExp(str,'i');
-  return moviesArray.filter((el) => {return regex.test(el.nameRU)||regex.test(el.nameEN)});
+  const target = str.trim().toLowerCase();
+  return moviesArray.filter((el) => {
+    return (
+      (el.nameRU.trim().toLowerCase().indexOf(target) !== -1) || 
+      (el.nameEN.trim().toLowerCase().indexOf(target) !== -1))
+  })
 }
 
 //устанавливает сохранённым фильмам свойство saved в true

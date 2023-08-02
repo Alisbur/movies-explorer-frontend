@@ -1,3 +1,6 @@
+//продолжительность короткометражки
+export const SHORT = 40;
+
 //Данные для api связи с сервером Beatfilm
 export const beatfilmMoviesApiConfig = {
   server: 'https://api.nomoreparties.co/beatfilm-movies',

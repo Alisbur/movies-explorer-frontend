@@ -1,7 +1,6 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
-import { movieDataFormatConverter, searchMovies, SHORT } from "../../utils/fncLib";
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -25,28 +24,30 @@ function App() {
   const navigate = useNavigate();
 
   //Стейт с данными пользователя
-  const [currentUser, setCurrentUser] = useState({ 
+  const [currentUser, setCurrentUser] = React.useState({ 
     name: '', 
     email: '', 
     _id: '',
     token: ''
   });
   //Массив сохранённых фильмов
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   //Залогинен ли пользователь
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   //Данные информационного попапа
-  const [infoTooltip, setInfoTooltip] = useState({ 
+  const [infoTooltip, setInfoTooltip] = React.useState({ 
     isInfoTooltipOpened:false,
     tooltipMessage:"",
     toolTipState:false
   });
   //Состояние бургера
-  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
   //Текущая страница
-  const [page, setPage] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFetching, setIsFetching] = useState(false);
+  const [page, setPage] = React.useState('');
+  //Стейт загрузки страницы. Используется для отключения защиты роутов во время проверки токена
+  const [isLoading, setIsLoading] = React.useState(true);
+  //Стейт работы запроса. Используется для блокировки элементов и повторных запросов во время выполнения запроса
+  const [isFetching, setIsFetching] = React.useState(false);
   
   //Определяем текущую страницу
   React.useEffect(() => {

@@ -8,8 +8,7 @@ function Profile(props) {
   const {values, setValues, errors, setErrors, isValid, setIsValid, handleChange, resetForm} = useValidation();
   const currentUser = React.useContext(CurrentUserContext);
   const [isDataModified, setIsDataModified] = React.useState('false');
-  const [isLoading, setIsLoading] = React.useState(false);
-  
+    
   //Установка в инпуты значений из currentUser
   React.useEffect(()=>{
     resetForm({name:currentUser.name, email:currentUser.email},{name:'', email:''}, false);

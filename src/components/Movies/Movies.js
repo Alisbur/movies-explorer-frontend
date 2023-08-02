@@ -3,7 +3,8 @@ import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { movieDataFormatConverter, searchMovies, updateSavedMovies, SHORT } from "../../utils/fncLib";
+import { movieDataFormatConverter, searchMovies, updateSavedMovies, checkQuery } from "../../utils/fncLib";
+import { SHORT } from "../../utils/constants";
 import moviesApi from '../../utils/MoviesApi';
 
 function Movies(props) {
@@ -99,7 +100,7 @@ function Movies(props) {
 
   //обработчик сабмита в форме поиска 
   function handleSearchClick(queryString) {
-    if(queryString) {
+    if(checkQuery(queryString)) {
       setIsLoading(true);
       setSearchQuery(queryString);
     } else {
