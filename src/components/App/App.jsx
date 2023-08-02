@@ -17,19 +17,20 @@ import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import mainApi from '../../utils/MainApi.js';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
 
+  //Стейт с данными пользователя
   const [currentUser, setCurrentUser] = useState({ 
     name: '', 
     email: '', 
     _id: '',
     token: ''
   });
-
   //Массив сохранённых фильмов
   const [savedMovies, setSavedMovies] = useState([]);
   //Залогинен ли пользователь
@@ -45,6 +46,7 @@ function App() {
   //Текущая страница
   const [page, setPage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
   
   //Определяем текущую страницу
   React.useEffect(() => {
@@ -80,11 +82,11 @@ function App() {
 
   //Обработчик регистрации нового пользователя на сервере  
   function handleRegisterSubmit( newUserData ) {
-    console.log(newUserData);
+    setIsFetching(true);
     mainApi.register(newUserData)
       .then((data) => {
         showInfoTooltip(`Регистрация прошла успешно!`, true);
-        handleLoginSubmit({ email:newUserData.email, password:newUserData.password });
+        handleLoginSubmit({ email:newUserData.email, password:newUserData.password }, true);
       })
       .catch((err) => {
         err.then(({message}) => {
@@ -94,7 +96,8 @@ function App() {
     }
 
   //Обработчик авторизации пользователя на сервере
-  function handleLoginSubmit( userData ) {
+  function handleLoginSubmit( userData , dontDisableFetch = false) {
+    setIsFetching(true);
     mainApi.login(userData)
       .then((data) => {
         localStorage.setItem('token', data.token);
@@ -110,16 +113,14 @@ function App() {
   //Обработчик проверки выполненной авторизации
   function handleAuthCheck() {
     const jwt = localStorage.getItem('token');
-    console.log(jwt);
-    console.log(isLoggedIn);
     if (jwt) {
       mainApi.authCheck(jwt)
         .then(({data}) => {
-          console.log(data);
           setIsLoggedIn(true);
           setCurrentUser({ name: data.name, email: data.email, _id: data._id, token: jwt});
           getSavedMovies(jwt);
           setIsLoading(false);
+          setIsFetching(false);
           if((location.pathname === '/signin')||(location.pathname==='/signup')) {
             navigate("/movies", {replace:true});
           }
@@ -136,6 +137,7 @@ function App() {
 
  //Обработчик сохранения новых данных пользователя на сервере
  function handleUpdateUserData(newUserData) {
+  setIsFetching(true);
   mainApi.modifyProfileData(newUserData, currentUser.token)
     .then(({ data }) => {
       setCurrentUser({...currentUser, name: data.name, email: data.email });
@@ -146,6 +148,7 @@ function App() {
         showInfoTooltip(`Не удалось сохранить новые данные профиля! Ошибка: ${message}`, false);
       })
     })
+    .finally(()=>setIsFetching(false));
 }
 
   //Обработчик авторизации пользователя на сервере
@@ -159,7 +162,8 @@ function App() {
   //Получение списка сохранённых фильмов
   function getSavedMovies(jwt) {
     mainApi.getSavedMovies(jwt)
-    .then(({data})=>setSavedMovies(data))
+    .then(({data})=>{
+      setSavedMovies(data)})
     .catch((err) => {
       err.then(({message}) => {
         showInfoTooltip(`Не удалось загрузить сохранённые фильмы! Ошибка: ${message}`, false);
@@ -167,40 +171,44 @@ function App() {
     })
   }
 
+  //Обработчик клика по кнопке лайка
   function handleLikeClick(movie) {
+    setIsFetching(true);
     movie.saved
     ? mainApi.deleteSavedMovie(movie, currentUser.token)
-      .then(({data}) => console.log(data))
+      .then(({data}) => setSavedMovies(savedMovies.filter((el)=>{return el.movieId !== data.movieId})))
       .catch((err) => {
         err.then(({message}) => {
           showInfoTooltip(`Не удалось удалить фильм! Ошибка: ${message}`, false);
         })
       })
-      .finally(()=> getSavedMovies(currentUser.token))
-
+      .finally(()=>setIsFetching(false))
     : mainApi.addSavedMovie(movie, currentUser.token)
-      .then(({data}) => console.log(data))
+      .then(({data}) => setSavedMovies([...savedMovies, data]))
       .catch((err) => {
         err.then(({message}) => {
           showInfoTooltip(`Не удалось сохранить фильм! Ошибка: ${message}`, false);
         })
       })
-      .finally(()=> getSavedMovies(currentUser.token))
+      .finally(()=>setIsFetching(false));
   }
 
+  //Обработчик клика по кнопке удаления карточки
   function handleDeleteClick(movie) {
+    setIsFetching(true);
     mainApi.deleteSavedMovie(movie, currentUser.token)
-      .then(({data}) => console.log(data))
+    .then(({data}) => setSavedMovies(savedMovies.filter((el)=>{return el.movieId !== data.movieId})))
       .catch((err) => {
         err.then(({message}) => {
           showInfoTooltip(`Не удалось удалить фильм! Ошибка: ${message}`, false);
         })
       })
-      .finally(()=> getSavedMovies(currentUser.token))
+    .finally(()=>setIsFetching(false));
   }
 
+  //Если грузится, рисуем прелоадер, если нет - App
   if(isLoading) 
-    return (<></>)
+    return (<Preloader />)
   
   return (
     <div className="app">
@@ -209,34 +217,60 @@ function App() {
           (<Header loggedIn={ isLoggedIn } isBurgerOpen={ isBurgerOpen } burgerClick={ handleBurgerClick }/>)}
         
         <Routes>
-          <Route path="/signup" element={ <Register submitBtnCap='Зарегистрироваться' register={handleRegisterSubmit} title="Добро пожаловать!" /> } />
-          <Route path="/signin" element={ <Login submitBtnCap='Войти' login={handleLoginSubmit} title="Рады видеть!" /> } />
-          <Route path="/" element={ <Main loggedIn={isLoggedIn} />} />
+          <Route path="/signup" element={ 
+            <Register 
+              submitBtnCap='Зарегистрироваться' 
+              register={handleRegisterSubmit} 
+              title="Добро пожаловать!" 
+              fetching = { isFetching } /> 
+            } />
+
+          <Route path="/signin" element={ 
+            <Login 
+              submitBtnCap='Войти' 
+              login={handleLoginSubmit} 
+              title="Рады видеть!" 
+              fetching = { isFetching } /> 
+            } />
+
+          <Route path="/" element={ 
+            <Main 
+              loggedIn={isLoggedIn} />
+            } />
+
           <Route path="/profile" element={ 
             <ProtectedRouteElement 
               element={ Profile } 
-              updateUserData={handleUpdateUserData} 
-              logout={handleLogout} 
-              loggedIn={isLoggedIn}
-              showInfoTooltip={showInfoTooltip} /> 
+              updateUserData={ handleUpdateUserData } 
+              logout={ handleLogout } 
+              loggedIn={ isLoggedIn }
+              showInfoTooltip={ showInfoTooltip }
+              fetching = { isFetching } /> 
             } />
+
           <Route path="/movies" element={ 
             <ProtectedRouteElement 
               element={ Movies } 
               loggedIn={ isLoggedIn } 
               handleLikeClick={ handleLikeClick }
               savedMovies = { savedMovies }
-              showInfoTooltip={showInfoTooltip} /> 
+              showInfoTooltip={showInfoTooltip} 
+              fetching = { isFetching } /> 
           } />
+
           <Route path="/saved-movies" element={
             <ProtectedRouteElement 
               element={ SavedMovies } 
               loggedIn={ isLoggedIn } 
               handleDeleteClick={ handleDeleteClick }
               savedMovies = { savedMovies }
-              showInfoTooltip={showInfoTooltip} />
+              showInfoTooltip={showInfoTooltip} 
+              fetching = { isFetching } />
           } />
-          <Route path="*" element={ <Page404 />} />
+
+          <Route path="*" element={ 
+            <Page404 />
+          } />
         </Routes>
       </CurrentUserContext.Provider>
       

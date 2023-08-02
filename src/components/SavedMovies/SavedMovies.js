@@ -26,7 +26,6 @@ function SavedMovies(props) {
 
   //При изменении одной из зависимостей происходит обновление результатов поиска
   React.useEffect (()=>{
-    console.log(searchQuerry);
     const result = searchMovies(props.savedMovies, searchQuerry);
     setSearchResult(
       filterCheckboxState
@@ -63,6 +62,7 @@ function SavedMovies(props) {
             drawSaved={ true } 
             films={ searchResult }
             handleDeleteClick={ props.handleDeleteClick }
+            fetching = { props.fetching }
             />
         }
       </div>

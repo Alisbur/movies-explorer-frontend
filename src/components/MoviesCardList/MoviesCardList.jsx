@@ -4,11 +4,16 @@ import React, { useState, useEffect } from 'react';
 import useWindowDimensions from "../../hooks/useWindowDimensions.js"
 
 function MoviesCardList(props) {
-
+  //Стейт сколько фильмов отображать
   const [numberOfFilmsToShow, setNumberOfFilmsToShow] = useState(16);
+  
+  //Стейт сколько фильмов добавлять
   const [numberOfFilmsToAdd, setNumberOfFilmsToAdd] = useState(0);
+  
+  //Ширина окна, определяемая хуком
   const { width } = useWindowDimensions();
 
+  //Устанавливаем начальные значения параметров вывода карточек
   useEffect(()=>{
     if (width>1279) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
     else if (width>1010) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
@@ -16,6 +21,7 @@ function MoviesCardList(props) {
     else {setNumberOfFilmsToShow(5); setNumberOfFilmsToAdd(2);}
   },[]);
 
+  //Устанавливаем значения параметров вывода карточек при изменении ширины окна
   useEffect(function () {
     if (width>1279) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
     else if (width>1010) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
@@ -35,6 +41,7 @@ function MoviesCardList(props) {
                   handleLikeClick = { props.handleLikeClick }
                   handleDeleteClick = { props.handleDeleteClick }
                   drawSaved = { props.drawSaved }
+                  fetching = { props.fetching }
                 />)
           }
         </div>

@@ -9,12 +9,10 @@ function MoviesCard(props) {
   const { trailerLink, image, nameRU, duration, saved } = props.movie;
 
   function handleLikeClick() {
-    console.log(props.movie);
     props.handleLikeClick(props.movie);
   }
 
   function handleDeleteClick() {
-    console.log(props.movie);
     props.handleDeleteClick(props.movie);
   }
 
@@ -28,8 +26,8 @@ function MoviesCard(props) {
           <h2 className="movies-card__item-title">{nameRU}</h2>
 
           {props.drawSaved 
-            ? (<button type="button" onClick={ handleDeleteClick } className="movies-card__delete-button button-transparency" aria-label="Удалить"></button>)
-            : (<button type="button" onClick={ handleLikeClick } className={`movies-card__like-button ${saved && "movies-card__like-button_active"} button-transparency`} aria-label={`${props.movie.saved ? "Удалить" : "Сохранить"}`} ></button>)
+            ? (<button type="button" onClick={ handleDeleteClick } disabled={ props.fetching } className="movies-card__delete-button button-transparency" aria-label="Удалить"></button>)
+            : (<button type="button" onClick={ handleLikeClick } disabled={ props.fetching } className={`movies-card__like-button ${saved && "movies-card__like-button_active"} button-transparency`} aria-label={`${props.movie.saved ? "Удалить" : "Сохранить"}`} ></button>)
           }
         </div>        
         <p className="movies-card__duration">{timeToStr(duration)}</p>

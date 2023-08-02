@@ -7,7 +7,8 @@ function Profile(props) {
 
   const {values, setValues, errors, setErrors, isValid, setIsValid, handleChange, resetForm} = useValidation();
   const currentUser = React.useContext(CurrentUserContext);
-  const [isDataModified, setIsDataModified]= React.useState('false');
+  const [isDataModified, setIsDataModified] = React.useState('false');
+  const [isLoading, setIsLoading] = React.useState(false);
   
   //Установка в инпуты значений из currentUser
   React.useEffect(()=>{
@@ -37,19 +38,19 @@ function Profile(props) {
             <li className="profile__item">
               <fieldset className="profile__item-content">
                 <label className="profile__item-name">Имя</label>
-                <input type="text" value={values.name ? values.name : "" } onChange={ handleChange } className={ `profile__input ${errors.name && "profile__input_type_error"}` } name="name" placeholder="Имя" required minLength="2" maxLength="40" aria-label="Имя пользователя" autoComplete="new-password" />
+                <input type="text" value={values.name ? values.name : "" } onChange={ handleChange } className={ `profile__input ${errors.name && "profile__input_type_error"}` } name="name" placeholder="Имя" disabled={ props.fetching } required minLength="2" maxLength="40" aria-label="Имя пользователя" autoComplete="new-password" />
               </fieldset>
               <span className={ `profile__input-error ${!isValid ? "profile__input-error_visible" : "" }`}>{errors.name}</span>
             </li>
             <li className="profile__item">
               <fieldset className="profile__item-content">
                 <label className="profile__item-name">E-mail</label>
-                <input type="email" value={ values.email ? values.email : "" } onChange={ handleChange } className={ `profile__input ${errors.email && "profile__input_type_error"}` } name="email" placeholder="Адрес электронной почты" required minLength="2" maxLength="40" aria-label="Адрес электронной почты" autoComplete="new-password" />
+                <input type="email" value={ values.email ? values.email : "" } onChange={ handleChange } className={ `profile__input ${errors.email && "profile__input_type_error"}` } name="email" placeholder="Адрес электронной почты" disabled={ props.fetching } required minLength="2" maxLength="40" aria-label="Адрес электронной почты" autoComplete="new-password" />
               </fieldset>
               <span className={ `profile__input-error ${!isValid ? "profile__input-error_visible" : "" }` }>{ errors.email }</span>
             </li>
           </ul>
-          <button type="submit" className={ `profile__save-button ${(isValid && isDataModified) ? "link-transparency" : "profile__save-button_type_inactive"}` } disabled={ !(isValid && isDataModified) } >Редактировать</button>
+          <button type="submit" className={ `profile__save-button ${(isValid && isDataModified && !props.fetching) ? "link-transparency" : "profile__save-button_type_inactive"}` } disabled={ !(isValid && isDataModified) || props.fetching } >Редактировать</button>
           <button type="button" className="profile__exit-button link-transparency" onClick={ props.logout }>Выйти из аккаунта</button>
         </form>
       </section>

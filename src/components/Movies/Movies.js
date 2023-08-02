@@ -16,7 +16,7 @@ function Movies(props) {
     : false
   });
   //Состояние поля ввода запроса
-  const [searchQuerry, setSearchQuerry] = React.useState(()=>{
+  const [searchQuery, setSearchQuery] = React.useState(()=>{
     const search = localStorage.getItem('search');
     return search
     ? JSON.parse(search).query
@@ -45,30 +45,20 @@ function Movies(props) {
   });    
   //Идёт ли загрузка
   const [isLoading, setIsLoading] = React.useState(false);
-  //Стейт для активации эффекта с поиском
-  const [isSearching, setIsSearching] = React.useState(false);
-  const [isQueryStringEmpty, setIsQueryStringEmpty] = React.useState(true);
-
+  
 //При изменении параметров последнего поиска после получения результата поиска они сохраняются в localstorage
   React.useEffect (()=>{
-    console.log(lastSearch);
-    console.log(searchResult);
-    console.log(moviesData);
-    console.log(props.savedMovies);
     localStorage.setItem('search', JSON.stringify(lastSearch));
   },[lastSearch])
 
 //При изменении результатов поиска обновляются параметры последнего поиска
   React.useEffect (()=>{
-    setLastSearch({ query:searchQuerry, chkbx:filterCheckboxState, result:searchResult });
-    console.log('SEARCH RES');
-    console.log(searchResult);
+    setLastSearch({ query:searchQuery, chkbx:filterCheckboxState, result:searchResult });
   },[searchResult])
 
 //Первый поиск: получаем фильмы -> преобразуем формат -> сохраняем массив в localstorage 
 //-> сохраняем список в стейте -> вызываем функцию поиска и результат заносим в стейт с результатами
   function handleFirstSearch() {
-    setIsLoading(true);
     moviesApi.getInitialMovies()
       .then((data)=>{
         const convertedArray = data.map(el=>movieDataFormatConverter(el))
@@ -76,42 +66,42 @@ function Movies(props) {
         setMoviesData(convertedArray);
         handleSearch(convertedArray);
       })
-      .finally(()=>setIsLoading(false))
   }
 
-//Второй и последующие поиски
+//Обычный поиск: ищем фильмы -> обновляем сохранённые фильмы в результате выдачи
   function handleSearch(moviesArray) {
-    const result = searchMovies(moviesArray, searchQuerry);
+    const result = searchMovies(moviesArray, searchQuery);
     setSearchResult(updateSavedMovies(result, props.savedMovies));
+    setIsLoading(false);
   }
   
-  //производит установку чекбокса в состояние state
+  //производит установку чекбокса в состояние state и сохраняет данные в последнем поиске
    function handleFilterCheckboxSwitch(newState) {
     setFilterCheckboxState(newState);
     setLastSearch({...lastSearch, 'chkbx': newState});
   }
 
+  //при изменении списка сохранённых фильмов обновляет выдачу
   React.useEffect(function() {
-    console.log('update');
     setSearchResult(updateSavedMovies(searchResult, props.savedMovies));
   }, [props.savedMovies])
-
+  
+  //при изменении строки запроса, если она не пустая, то 
+  //если фильмы не загружены -> делает первый поиск
+  //если фильмы загружены -> делает обычный поиск
   React.useEffect(function() {
-    if(isSearching) {
-      const search = localStorage.getItem('search')
-      const movies = localStorage.getItem('movies')
-      search && movies 
+    if(searchQuery) {
+      moviesData.length
       ? handleSearch(moviesData)
       : handleFirstSearch();
     }
-    setIsSearching(false);
-  }, [isSearching])
+  }, [searchQuery])
 
+  //обработчик сабмита в форме поиска 
   function handleSearchClick(queryString) {
     if(queryString) {
-      setIsQueryStringEmpty(false);
-      setIsSearching(true);
-      setSearchQuerry(queryString);
+      setIsLoading(true);
+      setSearchQuery(queryString);
     } else {
       props.showInfoTooltip('Нужно ввести ключевое слово', false) ;
     }
@@ -123,7 +113,7 @@ function Movies(props) {
         handleSearch={ handleSearchClick }
         checkboxState={ filterCheckboxState }
         handleCheckboxSwitch={ handleFilterCheckboxSwitch }
-        queryVal={ searchQuerry }
+        queryVal={ searchQuery }
       />
       <div className="movies">
         {isLoading
@@ -138,6 +128,7 @@ function Movies(props) {
               : searchResult
             }
             handleLikeClick={ props.handleLikeClick }
+            fetching = { props.fetching }
             />
         }
       </div>

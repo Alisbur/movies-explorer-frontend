@@ -9,7 +9,6 @@ function SearchForm(props) {
   const { values, setValues, errors, setErrors, isValid, setIsValid, handleChange, resetForm } = useValidation();
 
   React.useEffect(()=>{
-      console.log(`queryVal ${props.queryVal}`);
       resetForm({query: queryVal},{query:''}, false);
   },[]);
 
