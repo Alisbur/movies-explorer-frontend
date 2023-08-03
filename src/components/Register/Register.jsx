@@ -3,7 +3,6 @@ import './Register.css';
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import { useValidation } from "../../hooks/useValidation";
-import { REGEXP_EMAIL } from "../../utils/constants";
 
 function Register(props) {
 
