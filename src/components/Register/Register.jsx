@@ -32,7 +32,7 @@ function Register(props) {
             </fieldset>
             <fieldset className="register__fieldset">
               <label className="register__fieldset-name">E-mail</label>
-              <input type="email" onChange={handleChange} className={`register__input ${errors.email && "register__input_type_error"}`} placeholder="Адрес электронной почты" name="email" disabled={ props.fetching } required minLength="2" maxLength="40" autoComplete="new-password" />
+              <input type="email" onChange={handleChange} className={`register__input ${errors.email && "register__input_type_error"}`} placeholder="Адрес электронной почты" name="email" disabled={ props.fetching } required minLength="2" maxLength="40" pattern="^[a-zA-Z0-9]([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+){1,}\.([a-zA-Z]+)$" autoComplete="new-password" />
               <span className={`register__input-error ${!isValid ? "register__input-error_visible" : "" }`}>{errors.email}</span>
             </fieldset>
             <fieldset className="register__fieldset">

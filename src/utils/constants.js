@@ -12,10 +12,6 @@ export const MAX_WINDOW_WIDTH_3_COLS = 1279;
 export const MAX_WINDOW_WIDTH_2_COLS = 1010;
 export const MAX_WINDOW_WIDTH_1_COL = 650;
 
-//регулярка валидации e-mail
-export const REGEXP_EMAIL = "[a-zA-Z0-9\\-\\._~:/?#[\\]@!$&'()*+,;=]+@[a-zA-Z0-9\\-\\._~:\\/?#[\\]@!$&'()*+,;=]+\\.[a-zA-Z]+";
-/*export const REGEXP_EMAIL = "^[a-zA-Z0-9\-._~:\/?#[\]@!$&'()*+,;=]+@[a-zA-Z0-9\-._~:\/?#[\]@!$&'()*+,;=]+\.[a-zA-Z]+$";*/
-
 //Данные для api связи с сервером Beatfilm
 export const beatfilmMoviesApiConfig = {
   server: 'https://api.nomoreparties.co/beatfilm-movies',

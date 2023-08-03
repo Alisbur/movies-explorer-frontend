@@ -44,7 +44,7 @@ function Profile(props) {
             <li className="profile__item">
               <fieldset className="profile__item-content">
                 <label className="profile__item-name">E-mail</label>
-                <input type="email" value={ values.email ? values.email : "" } onChange={ handleChange } className={ `profile__input ${errors.email && "profile__input_type_error"}` } name="email" placeholder="Адрес электронной почты" disabled={ props.fetching } required minLength="2" maxLength="40" aria-label="Адрес электронной почты" autoComplete="new-password" />
+                <input type="email" value={ values.email ? values.email : "" } onChange={ handleChange } className={ `profile__input ${errors.email && "profile__input_type_error"}` } name="email" placeholder="Адрес электронной почты" disabled={ props.fetching } required minLength="2" maxLength="40" pattern="^[a-zA-Z0-9]([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+){1,}\.([a-zA-Z]+)$" aria-label="Адрес электронной почты" autoComplete="new-password" />
               </fieldset>
               <span className={ `profile__input-error ${!isValid ? "profile__input-error_visible" : "" }` }>{ errors.email }</span>
             </li>
