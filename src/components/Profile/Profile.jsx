@@ -32,7 +32,7 @@ function Profile(props) {
     <main className="main">
       <section className="profile" aria-label="Страница редактирования данных профиля пользователя">
         <form className="profile__content" onSubmit={handleSubmit}>
-          <h1 className="profile__title">Привет Евгений!</h1>
+          <h1 className="profile__title">Привет {currentUser.name}!</h1>
           <ul className="profile__data">
             <li className="profile__item">
               <fieldset className="profile__item-content">

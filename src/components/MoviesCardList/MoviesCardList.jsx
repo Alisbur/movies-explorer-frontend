@@ -2,6 +2,19 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
 import React from 'react';
 import useWindowDimensions from "../../hooks/useWindowDimensions.js"
+import {
+  FILMS_TO_SHOW_4_COLS,
+  FILMS_TO_ADD_4_COLS,
+  FILMS_TO_SHOW_3_COLS,
+  FILMS_TO_ADD_3_COLS,
+  FILMS_TO_SHOW_2_COLS,
+  FILMS_TO_ADD_2_COLS,
+  FILMS_TO_SHOW_1_COL,
+  FILMS_TO_ADD_1_COL,
+  MAX_WINDOW_WIDTH_3_COLS,
+  MAX_WINDOW_WIDTH_2_COLS,
+  MAX_WINDOW_WIDTH_1_COL
+} from "../../utils/constants"
 
 function MoviesCardList(props) {
   //Стейт сколько фильмов отображать
@@ -15,18 +28,18 @@ function MoviesCardList(props) {
 
   //Устанавливаем начальные значения параметров вывода карточек
   React.useEffect(()=>{
-    if (width>1279) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
-    else if (width>1010) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
-    else if (width>650) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(4);}
-    else {setNumberOfFilmsToShow(5); setNumberOfFilmsToAdd(2);}
+    if (width > MAX_WINDOW_WIDTH_3_COLS) {setNumberOfFilmsToShow(FILMS_TO_SHOW_4_COLS); setNumberOfFilmsToAdd(FILMS_TO_ADD_4_COLS);}
+    else if (width > MAX_WINDOW_WIDTH_2_COLS) {setNumberOfFilmsToShow(FILMS_TO_SHOW_3_COLS); setNumberOfFilmsToAdd(FILMS_TO_ADD_3_COLS);}
+    else if (width > MAX_WINDOW_WIDTH_1_COL) {setNumberOfFilmsToShow(FILMS_TO_SHOW_2_COLS); setNumberOfFilmsToAdd(FILMS_TO_ADD_2_COLS);}
+    else {setNumberOfFilmsToShow(FILMS_TO_SHOW_1_COL); setNumberOfFilmsToAdd(FILMS_TO_ADD_1_COL);}
   },[]);
 
   //Устанавливаем значения параметров вывода карточек при изменении ширины окна
   React.useEffect(function () {
-    if (width>1279) {setNumberOfFilmsToShow(16); setNumberOfFilmsToAdd(8);}
-    else if (width>1010) {setNumberOfFilmsToShow(12); setNumberOfFilmsToAdd(6);}
-    else if (width>650) {setNumberOfFilmsToShow(8); setNumberOfFilmsToAdd(4);}
-    else {setNumberOfFilmsToShow(5); setNumberOfFilmsToAdd(2);}
+    if (width > MAX_WINDOW_WIDTH_3_COLS) {setNumberOfFilmsToShow(FILMS_TO_SHOW_4_COLS); setNumberOfFilmsToAdd(FILMS_TO_ADD_4_COLS);}
+    else if (width > MAX_WINDOW_WIDTH_2_COLS) {setNumberOfFilmsToShow(FILMS_TO_SHOW_3_COLS); setNumberOfFilmsToAdd(FILMS_TO_ADD_3_COLS);}
+    else if (width > MAX_WINDOW_WIDTH_1_COL) {setNumberOfFilmsToShow(FILMS_TO_SHOW_2_COLS); setNumberOfFilmsToAdd(FILMS_TO_ADD_2_COLS);}
+    else {setNumberOfFilmsToShow(FILMS_TO_SHOW_1_COL); setNumberOfFilmsToAdd(FILMS_TO_ADD_1_COL);}
   }, [width]);
 
   return (
