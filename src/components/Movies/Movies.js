@@ -119,8 +119,8 @@ function Movies(props) {
       <div className="movies">
         {isLoading
         ? <Preloader />
-        : searchResult.length === 0
-          ? moviesData.length && <h2 className="movies__nothingFound">Ничего не найдено</h2>
+        : !searchResult.length
+          ? !!moviesData.length && <h2 className="movies__nothingFound">Ничего не найдено</h2>
           : <MoviesCardList 
             drawSaved={false} 
             films={
